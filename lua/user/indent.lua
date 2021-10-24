@@ -6,7 +6,7 @@ vim.g.indent_blankline_filetype_exclude = {
   "terminal",
   "dashboard",
   "lspinfo",
-  "lsp-installer"
+  "lsp-installer",
 }
 vim.g.indent_blankline_buftype_exclude = { "terminal" }
 
