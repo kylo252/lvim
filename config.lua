@@ -13,12 +13,15 @@ for module, _ in pairs(package.loaded) do
 end
 
 vim.list_extend(lvim.lsp.override, { "clangd" })
+vim.lsp.set_log_level "info"
+require("vim.lsp.log").set_format_func(vim.inspect)
 
 require "user.keymappings"
 require "user.settings"
 require "user.whichkey"
 require "user.dashboard"
 require "user.plugins"
+require "user.utils"
 
 local components = require "lvim.core.lualine.components"
 lvim.builtin.lualine.sections.lualine_y = { "location" }
@@ -27,8 +30,9 @@ lvim.builtin.lualine.sections.lualine_b = { components.branch, "filename" }
 ---------- scratch
 pcall(require, "scratch")
 
-function _G.dump(...)
-  local objects = vim.tbl_map(vim.inspect, { ... })
-  print(unpack(objects))
-  return ...
-end
+lvim.lsp.null_ls.config = {
+  -- debug = true,
+  log = {
+    level = "debug",
+  },
+}

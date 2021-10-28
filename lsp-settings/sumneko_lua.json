@@ -1,0 +1,13 @@
+{
+  "Lua.workspace.ignoreDir": [
+    ".vscode",
+    ".git",
+    ".github",
+    "colors",
+    "utils"
+  ],
+  "Lua.workspace.library": [
+    "/usr/local/share/nvim/runtime",
+    "/usr/local/share/nvim/runtime/lsp"
+  ]
+}
