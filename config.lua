@@ -1,15 +1,6 @@
 -- general
-lvim.log.level = "info"
+lvim.log.level = "debug"
 lvim.format_on_save = true
--- lvim.transparent_window = true
-lvim.builtin.terminal.active = true
-lvim.builtin.project.datapath = vim.fn.stdpath "cache" .. "/lvim"
-
--- lvim.builtin.notify.active = true
--- lvim.builtin.notify.opts.timeout = 1000
-
-lvim.builtin.nvimtree.hide_dotfiles = 0
-lvim.builtin.nvimtree.disable_window_picker = 1
 
 lvim.lsp.diagnostics.virtual_text = false
 lvim.lsp.default_keybinds = true

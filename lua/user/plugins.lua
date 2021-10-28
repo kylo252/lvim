@@ -1,3 +1,9 @@
+lvim.builtin.project.datapath = vim.fn.stdpath "cache" .. "/lvim"
+lvim.builtin.terminal.active = true
+
+lvim.builtin.nvimtree.hide_dotfiles = 0
+lvim.builtin.nvimtree.disable_window_picker = 1
+
 lvim.plugins = {
 
   -- LSP and linting
@@ -18,7 +24,9 @@ lvim.plugins = {
   {
     "folke/persistence.nvim",
     event = "VimEnter",
-    config = [[ require("persistence").setup({dir = vim.fn.stdpath("cache") .. "/lvim_sessions/" }) ]],
+    config = function()
+      require("persistence").setup { dir = vim.fn.stdpath "cache" .. "/lvim_sessions/" }
+    end,
   },
   -- Search
   {
@@ -27,23 +35,21 @@ lvim.plugins = {
   {
     "ggandor/lightspeed.nvim",
     event = "BufWinEnter",
-    config = [[require('user.lightspeed')]],
+    config = function()
+      require "user.lightspeed"
+    end,
   },
 
   -- TMUX and session management
   {
     "aserowy/tmux.nvim",
     event = "VimEnter",
-    config = [[require('user.tmux').setup()]],
+    config = function()
+      require("user.tmux").setup()
+    end,
   },
 
   -- UI
-  -- {
-  -- 	"kylo252/onedark.nvim",
-  -- 	config = function()
-  -- 		-- require("onedark").setup()
-  -- 	end,
-  -- },
   {
     "karb94/neoscroll.nvim",
     event = "BufRead",
@@ -54,13 +60,18 @@ lvim.plugins = {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "VimEnter",
-    config = [[require('user.indent')]],
+    config = function()
+      require "user.indent"
+    end,
   },
 
+  { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true },
   -- GIT
   {
     "ruifm/gitlinker.nvim",
     event = "BufWinEnter",
-    config = [[require('gitlinker').setup()]],
+    config = function()
+      require("gitlinker").setup()
+    end,
   },
 }
