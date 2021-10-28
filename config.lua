@@ -5,8 +5,8 @@ lvim.format_on_save = true
 lvim.builtin.terminal.active = true
 lvim.builtin.project.datapath = vim.fn.stdpath "cache" .. "/lvim"
 
-lvim.builtin.notify.active = true
-lvim.builtin.notify.opts.timeout = 1000
+-- lvim.builtin.notify.active = true
+-- lvim.builtin.notify.opts.timeout = 1000
 
 lvim.builtin.nvimtree.hide_dotfiles = 0
 lvim.builtin.nvimtree.disable_window_picker = 1
@@ -20,6 +20,8 @@ for module, _ in pairs(package.loaded) do
     package.loaded[module] = nil
   end
 end
+
+vim.list_extend(lvim.lsp.override, { "clangd" })
 
 require "user.keymappings"
 require "user.settings"
