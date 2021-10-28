@@ -115,8 +115,9 @@ lvim.builtin.which_key.mappings = {
   },
   t = {
     name = "+scratch test",
-    ["1"] = { "<cmd>lua package.loaded['scratch'] = nil; require('scratch').test1()<cr>", "scratch test1" },
-    ["2"] = { "<cmd>lua package.loaded['scratch'] = nil; require('scratch').test2()<cr>", "scratch test2" },
+    a = { "<cmd>lua package.loaded['scratch'] = nil; require('scratch').test1()<cr>", "scratch test1" },
+    s = { "<cmd>lua package.loaded['scratch'] = nil; require('scratch').test2()<cr>", "scratch test2" },
+    e = { "<cmd>edit ~/.config/lvim/lua/scratch.lua<cr>", "edit scratch file" },
   },
   p = {
     name = "Packer",
@@ -131,8 +132,12 @@ lvim.builtin.which_key.mappings = {
   L = {
     name = "+LunarVim",
     c = {
-      "<cmd>edit" .. get_config_dir() .. "/config.lua<cr>",
+      "<cmd>edit ~/.config/lvim/config.lua<cr>",
       "Edit config.lua",
+    },
+    C = {
+      "<cmd>lua require('user.telescope.custom-finders').find_lvim_config()<cr>",
+      "Find lvim config files",
     },
     f = {
       "<cmd>lua require('lvim.core.telescope.custom-finders').find_lunarvim_files()<cr>",

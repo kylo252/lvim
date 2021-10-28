@@ -82,6 +82,23 @@ function M.find_dotfiles()
   require("telescope.builtin").find_files(opts)
 end
 
+function M.find_lvim_config()
+  local opts = themes.get_ivy {
+    previewer = false,
+    sorting_strategy = "ascending",
+    layout_strategy = "bottom_pane",
+    layout_config = {
+      height = 15,
+      width = 0.5,
+    },
+    prompt = ">> ",
+    prompt_title = "~ lvim config ~",
+    cwd = "~/.config/lvim",
+    find_command = { "git", "ls-files" },
+  }
+  require("telescope.builtin").find_files(opts)
+end
+
 function M.find_runtime_files(opts)
   opts = opts or themes.get_ivy {}
   local runtimepath = vim.opt.runtimepath:get()
