@@ -13,7 +13,7 @@ function! Dump(cmd)
     echoerr "no output"
   else
     " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
-    enew
+    new
     nnoremap <silent> <buffer> q :close<CR>
     setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
     silent put=message
