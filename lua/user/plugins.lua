@@ -4,7 +4,7 @@ lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.hide_dotfiles = 0
 lvim.builtin.nvimtree.disable_window_picker = 1
 
-lvim.plugins = {
+return {
 
   -- LSP and linting
   { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead" },
