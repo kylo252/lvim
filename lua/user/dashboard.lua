@@ -6,7 +6,10 @@ lvim.builtin.dashboard.custom_section = {
     description = { "  Find File          " },
     command = "lua require('telescope.builtin').find_files({hidden = true, ignored = false})",
   },
-  c = { description = { "  Plugins            " }, command = ":edit ~/.config/nvim/lua/plugins.lua" },
+  c = {
+    description = { "  Plugins            " },
+    command = ":edit ~/.local/share/lunarvim/lvim/lua//lvim/plugins.lua",
+  },
   s = { description = { "  Settings           " }, command = ":edit ~/.config/nvim/lua/settings.lua" },
   d = { description = { "  Find Word          " }, command = "Telescope live_grep" },
   n = { description = { "  Load Last Session  " }, command = "SessionLoad" },

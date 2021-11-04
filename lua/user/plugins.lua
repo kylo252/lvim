@@ -59,13 +59,11 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "VimEnter",
+    event = "BufWinEnter",
     config = function()
       require "user.indent"
     end,
   },
-
-  { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true },
   -- GIT
   {
     "ruifm/gitlinker.nvim",
