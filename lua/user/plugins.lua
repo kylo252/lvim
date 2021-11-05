@@ -25,7 +25,7 @@ return {
     "folke/persistence.nvim",
     event = "VimEnter",
     config = function()
-      require("persistence").setup { dir = vim.fn.stdpath "cache" .. "/lvim_sessions/" }
+      require("persistence").setup { dir = get_cache_dir() .. "/lvim_sessions/" }
     end,
   },
   -- Search
@@ -43,7 +43,7 @@ return {
   -- TMUX and session management
   {
     "aserowy/tmux.nvim",
-    event = "VimEnter",
+    event = "BufRead",
     config = function()
       require("user.tmux").setup()
     end,
@@ -59,9 +59,9 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufWinEnter",
+    event = "BufReadPost",
     config = function()
-      require "user.indent"
+      require("user.indent").setup()
     end,
   },
   -- GIT

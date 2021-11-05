@@ -19,6 +19,7 @@ stds.nvim = {
     "os",
     "vim",
     "join_paths",
+    "dump",
     "get_runtime_dir",
     "get_config_dir",
     "get_cache_dir",
@@ -41,4 +42,3 @@ ignore = {
   "631", -- max_line_length
   "212/_.*", -- unused argument, for vars with "_" prefix
 }
-

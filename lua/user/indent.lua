@@ -1,15 +1,25 @@
-vim.g.indentLine_enabled = 1
-vim.g.indent_blankline_char = "▏"
+local M = {}
 
-vim.g.indent_blankline_filetype_exclude = {
-  "alpha",
-  "help",
-  "terminal",
-  "dashboard",
-  "lspinfo",
-  "lsp-installer",
-}
-vim.g.indent_blankline_buftype_exclude = { "terminal" }
+function M.setup()
+  local opts = {
+    char = "▏",
+    filetype_exclude = {
+      "alpha",
+      "help",
+      "terminal",
+      "dashboard",
+      "lspinfo",
+      "lsp-installer",
+    },
+    buftype_exclude = { "terminal" },
+    bufname_exclude = { "config.lua" },
 
-vim.g.indent_blankline_show_trailing_blankline_indent = false
-vim.g.indent_blankline_show_first_indent_level = true
+    show_trailing_blankline_indent = false,
+    show_first_indent_level = false,
+    use_treesitter = false,
+  }
+
+  require("indent_blankline").setup(opts)
+end
+
+return M

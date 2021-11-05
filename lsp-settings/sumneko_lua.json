@@ -9,5 +9,9 @@
   "Lua.workspace.library": [
     "/usr/local/share/nvim/runtime",
     "/usr/local/share/nvim/runtime/lsp"
+  ],
+  "Lua.diagnostics.disable": [
+    "undefined-global",
+    "redundant-parameter"
   ]
 }

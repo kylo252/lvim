@@ -69,7 +69,10 @@ lvim.builtin.which_key.mappings = {
   l = {
     name = "LSP",
     a = { "<cmd>lua require('lvim.core.telescope').code_actions()<cr>", "Code Action" },
-    c = { "<cmd>lua require('lsp').get_ls_capabilities()<cr>", "Show language-server capabilities" },
+    c = {
+      "<cmd>lua dump(require('lvim.lsp.utils').get_client_capabilities(3))<cr>",
+      "Show language-server capabilities",
+    },
     d = {
       "<cmd>Telescope lsp_document_diagnostics<cr>",
       "Document Diagnostics",

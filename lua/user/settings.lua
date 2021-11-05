@@ -34,8 +34,10 @@ vim.opt.tabstop = 2 -- insert 4 spaces for a tab
 vim.opt.termguicolors = true -- set term gui colors (most terminals support this)
 vim.opt.timeoutlen = 300 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.title = true -- set the title of window to the value of the titlestring
-vim.opt.undodir = vim.fn.stdpath "cache" .. "/lvim/undo" -- set an undo directory
+vim.opt.undodir = get_cache_dir() .. "/lvim/undo" -- set an undo directory
 vim.opt.undofile = true -- enable persisten undo
 vim.opt.updatetime = 300 -- faster completion
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+
+-- vim.opt.shada = "'100,<0,f0,n" .. join_paths(get_cache_dir(), "lvim.shada")

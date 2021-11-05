@@ -1,8 +1,15 @@
 local M = {}
+
 function _G.dump(...)
   local objects = vim.tbl_map(vim.inspect, { ... })
   print(unpack(objects))
   return ...
+end
+
+function _G.log_q(...)
+  local objects = vim.tbl_map(vim.inspect, { ... })
+  local log = require("plenary.log").new { plugin = "quick", use_console = "sync", level = "debug", info_level = 5 }
+  return log.info(unpack(objects))
 end
 
 vim.cmd [[
