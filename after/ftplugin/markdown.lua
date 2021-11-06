@@ -1,2 +1,7 @@
-local linters = require "lvim.lsp.null-ls.linters"
-linters.setup { { exe = "write-good" } }
+require("lvim.lsp.manager").setup "ltex"
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup { { exe = "prettier", filetypes = { "markdown" } } }
+vim.cmd [[
+  setl list
+  setl listchars=trail:*
+]]

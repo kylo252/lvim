@@ -190,3 +190,8 @@ lvim.builtin.which_key.mappings = {
     i = { ":TSConfigInfo<cr>", "Info" },
   },
 }
+
+lvim.builtin.which_key.vmappings = {
+  ["/"] = { "<ESC><CMD>lua ___comment_gc(vim.fn.visualmode())<CR>", "Comment" },
+  ["lf"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "Format" },
+}

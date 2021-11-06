@@ -42,6 +42,5 @@ require("nvim-lsp-installer").settings {
   log_level = vim.log.levels.DEBUG,
 }
 
-vim.tbl_deep_extend("keep", lvim.plugins, {
-  { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true },
-})
+local scratch_plugins = { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true }
+table.insert(lvim.plugins, scratch_plugins)
