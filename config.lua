@@ -26,20 +26,22 @@ require "user.utils"
 lvim.plugins = require "user.plugins"
 
 local components = require "lvim.core.lualine.components"
--- lvim.builtin.lualine.sections.lualine_y = { "location" }
-lvim.builtin.lualine.sections.lualine_b = { "filename", components.branch }
+lvim.builtin.lualine.sections.lualine_y = { "location" }
+lvim.builtin.lualine.sections.lualine_a = { "filename" }
+lvim.builtin.lualine.sections.lualine_b = { components.branch }
+
 ---------- scratch
 pcall(require, "scratch")
 
 lvim.lsp.null_ls.config = {
   -- debug = true,
   log = {
-    level = "debug",
+    level = "warn",
   },
 }
 
 require("nvim-lsp-installer").settings {
-  log_level = vim.log.levels.DEBUG,
+  log_level = vim.log.levels.WARN,
 }
 
 local scratch_plugins = { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true }
