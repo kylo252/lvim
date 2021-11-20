@@ -25,12 +25,6 @@ lvim.keys = {
   ---@usage change or add keymappings for normal mode
   normal_mode = {
 
-    -- --FIXME: these are overritten on reload #1789
-    ["<C-h>"] = [[<cmd>lua require'tmux'.move_left()<cr>]],
-    ["<C-j>"] = [[<cmd>lua require'tmux'.move_bottom()<cr>]],
-    ["<C-k>"] = [[<cmd>lua require'tmux'.move_top()<cr>]],
-    ["<C-l>"] = [[<cmd>lua require'tmux'.move_right()<cr>]],
-
     --live grep
     ["<M-f>"] = "<cmd>Telescope live_grep<CR>",
 
