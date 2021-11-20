@@ -36,7 +36,7 @@ return {
     "ggandor/lightspeed.nvim",
     event = "BufWinEnter",
     config = function()
-      require "user.lightspeed"
+      require("user.lightspeed").setup()
     end,
   },
 
