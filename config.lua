@@ -44,5 +44,7 @@ require("nvim-lsp-installer").settings {
   log_level = vim.log.levels.WARN,
 }
 
-local scratch_plugins = { "chrisbra/Colorizer", cmd = "ColorToggle", opt = true }
+local scratch_plugins = 
+  {"pwntester/octo.nvim", event = "FIleReadPost", opt = true, cmd = "Octo"}
+
 table.insert(lvim.plugins, scratch_plugins)
