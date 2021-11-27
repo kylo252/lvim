@@ -50,6 +50,7 @@ lvim.builtin.which_key.mappings = {
   },
   g = {
     name = "+git",
+    b = { "<cmd>Telescope git_bcommits theme=get_ivy<cr>", "Buffers commits" },
     c = {
       b = {
         '<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".copy_to_clipboard })<cr>',

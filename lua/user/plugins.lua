@@ -1,7 +1,7 @@
 lvim.builtin.project.datapath = vim.fn.stdpath "cache" .. "/lvim"
 lvim.builtin.terminal.active = true
 
-lvim.builtin.nvimtree.hide_dotfiles = 0
+-- lvim.builtin.nvimtree.hide_dotfiles = 0
 lvim.builtin.nvimtree.disable_window_picker = 1
 
 return {
