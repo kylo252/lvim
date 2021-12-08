@@ -1,4 +1,4 @@
-lvim.builtin.dashboard.active = true
+lvim.builtin.dashboard.active = false
 vim.g.dashboard_enable_session = 0
 lvim.builtin.dashboard.custom_section = {
   a = { description = { "  Recently Used Files" }, command = "Telescope oldfiles" },
