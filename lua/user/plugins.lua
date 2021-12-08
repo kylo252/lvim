@@ -51,6 +51,13 @@ return {
 
   -- UI
   {
+    "goolord/alpha-nvim",
+    event = "BufWinEnter",
+    config = function()
+      require("user.dashboard").setup()
+    end,
+  },
+  {
     "karb94/neoscroll.nvim",
     event = "BufRead",
     config = function()

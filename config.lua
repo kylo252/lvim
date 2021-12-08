@@ -46,8 +46,13 @@ require("nvim-lsp-installer").settings {
   log_level = vim.log.levels.WARN,
 }
 
-local scratch_plugins = 
-  {"pwntester/octo.nvim", event = "FIleReadPost", opt = true, cmd = "Octo"}
+local scratch_plugins = {
+  "pwntester/octo.nvim",
+  event = "FIleReadPost",
+  opt = true,
+  cmd = "Octo",
+  disable = true,
+}
 
 table.insert(lvim.plugins, scratch_plugins)
 
