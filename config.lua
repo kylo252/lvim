@@ -16,7 +16,7 @@ for module, _ in pairs(package.loaded) do
   end
 end
 
-vim.list_extend(lvim.lsp.override, { "clangd", "pyright" })
+vim.list_extend(lvim.lsp.override, { "clangd", "pyright", "sumneko_lua" })
 
 require "user.keymappings"
 require "user.settings"
@@ -61,3 +61,11 @@ code_actions.setup {
   { name = "gitsigns" },
   { name = "shellcheck" },
 }
+
+lvim.lsp.on_attach_callback = function(_, bufnr)
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+end

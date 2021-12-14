@@ -1,5 +1,6 @@
 lvim.builtin.project.datapath = vim.fn.stdpath "cache" .. "/lvim"
 lvim.builtin.terminal.active = true
+lvim.builtin.terminal.direction = "horizontal"
 
 -- lvim.builtin.nvimtree.hide_dotfiles = 0
 lvim.builtin.nvimtree.disable_window_picker = 1
@@ -8,7 +9,13 @@ return {
 
   -- LSP and linting
   { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead" },
-
+  {
+    "nvim-treesitter/playground",
+    cmd = "TSPlaygroundToggle",
+    config = function()
+      lvim.builtin.treesitter.playground.enable = true
+    end,
+  },
   {
     "kevinhwang91/nvim-bqf",
     event = "BufRead",
@@ -25,7 +32,9 @@ return {
     "folke/persistence.nvim",
     event = "VimEnter",
     config = function()
-      require("persistence").setup { dir = get_cache_dir() .. "/lvim_sessions/" }
+      require("persistence").setup {
+        dir = get_cache_dir() .. "/lvim_sessions/",
+      }
     end,
   },
   -- Search
@@ -48,7 +57,6 @@ return {
       require("user.tmux").setup()
     end,
   },
-
   -- UI
   {
     "goolord/alpha-nvim",
@@ -79,4 +87,5 @@ return {
       require("gitlinker").setup()
     end,
   },
+  { "folke/lua-dev.nvim" },
 }
