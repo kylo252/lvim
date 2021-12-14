@@ -2,6 +2,7 @@
 vim.cmd "set inccommand=split"
 vim.cmd "set iskeyword+=-"
 vim.cmd "set whichwrap+=<,>,[,],h,l"
+vim.cmd "set syntax=off"
 
 ---  SETTINGS  ---
 vim.opt.backup = false -- creates a backup file
@@ -13,6 +14,10 @@ vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
 vim.opt.cursorline = true -- highlight the current line
 vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.fileencoding = "utf-8" -- the encoding written to a file
+vim.opt.fillchars = { fold = " " } -- remove folding chars
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevel = 10 -- don't close any folds by default
+vim.opt.foldmethod = "expr"
 vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
 vim.opt.hidden = true -- required to keep multiple buffers and open multiple buffers
 vim.opt.ignorecase = true -- ignore case in search patterns
@@ -40,4 +45,15 @@ vim.opt.updatetime = 300 -- faster completion
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 
--- vim.opt.shada = "'100,<0,f0,n" .. join_paths(get_cache_dir(), "lvim.shada")
+if vim.fn.has "wsl" == 1 then
+  vim.g.clipboard = {
+    copy = {
+      ["+"] = "win32yank.exe -i --crlf",
+      ["*"] = "win32yank.exe -i --crlf",
+    },
+    paste = {
+      ["+"] = "win32yank.exe -o --lf",
+      ["*"] = "win32yank.exe -o --lf",
+    },
+  }
+end
