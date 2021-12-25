@@ -18,7 +18,8 @@ lvim.builtin.which_key.mappings = {
   e = { "<cmd>NvimTreeToggle<CR>", "NvimTree" },
   f = {
     name = "+Find",
-    f = { "<cmd>Telescope find_files<CR>", "Find Files" },
+    -- f = { "<cmd>Telescope find_files<CR>", "Find Files" },
+    f = { require("user.telescope.custom-finders").find_project_files, "Find File" },
     g = { "<cmd>lua require('user.telescope.custom-finders').live_grep_v2()<CR>", "Live Grep v2" },
     h = { "<cmd>Telescope help_tags<CR>", "help tags" },
     j = { "<cmd>Telescope zoxide list theme=get_ivy<CR>", "Zoxide" },
@@ -116,6 +117,7 @@ lvim.builtin.which_key.mappings = {
     l = { "<cmd>lua require('persistance').load()<cr>", "restore the session for the current directory" },
     r = { "<cmd>lua require('persistence').load({ last = true })<cr>)", "restore the last session" },
     s = { "<cmd>lua require('persistence').save()<cr>", "save session" },
+    f = { "<cmd>lua require('persistence').list()<cr>", "list sessions" },
   },
   t = {
     name = "+scratch test",
