@@ -72,16 +72,16 @@ lvim.builtin.which_key.mappings = {
     name = "LSP",
     a = { "<cmd>lua require('lvim.core.telescope').code_actions()<cr>", "Code Action" },
     c = {
-      "<cmd>lua dump(require('lvim.lsp.utils').get_client_capabilities(3))<cr>",
+      "<cmd>lua dump(require('lvim.lsp.utils').get_client_capabilities())<cr>",
       "Show language-server capabilities",
     },
     d = {
-      "<cmd>Telescope lsp_document_diagnostics<cr>",
-      "Document Diagnostics",
+      "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>",
+      "Buffer Diagnostics",
     },
     w = {
-      "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-      "Workspace Diagnostics",
+      "<cmd>Telescope diagnostics<cr>",
+      "Diagnostics",
     },
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
