@@ -29,8 +29,8 @@ lvim.keys = {
     ["<M-f>"] = "<cmd>Telescope live_grep<CR>",
 
     -- Tab switch buffer
-    ["<S-l>"] = ":BufferNext<CR>",
-    ["<S-h>"] = ":BufferPrevious<CR>",
+    ["<S-l>"] = ":BufferLineCycleNext<CR>",
+    ["<S-h>"] = ":BufferLineCyclePrev<CR>",
 
     -- Move current line / block with Alt-j/k a la vscode.
     -- FIXME: this interferes with tmux
@@ -59,7 +59,7 @@ lvim.keys = {
     ["<C-p>"] = "<cmd>Telescope find_files theme=get_ivy<CR>",
 
     -- no one cares about ex mode
-    ["<S-q>"] = "<cmd>BufferClose<cr>",
+    ["<S-q>"] = "<cmd>lua require('user.bufferline').buf_kill('bd')<cr>",
   },
 
   ---@usage change or add keymappings for terminal mode

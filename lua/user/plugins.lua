@@ -59,6 +59,13 @@ return {
     end,
   },
   {
+    "akinsho/bufferline.nvim",
+    config = function()
+      lvim.builtin.bufferline.active = false
+      require("user.bufferline").setup()
+    end,
+  },
+  {
     "karb94/neoscroll.nvim",
     event = "BufRead",
     config = function()

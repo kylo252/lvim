@@ -5,7 +5,10 @@ lvim.format_on_save = true
 
 ---{{{ builtins
 lvim.builtin.notify.active = true
+lvim.builtin.bufferline.active = false
+
 lvim.builtin.project.datapath = vim.fn.stdpath "cache" .. "/lvim"
+lvim.builtin.project.detection_methods = { "lsp", "pattern" }
 
 lvim.builtin.terminal.active = true
 lvim.builtin.terminal.direction = "horizontal"
