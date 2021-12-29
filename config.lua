@@ -9,6 +9,8 @@ lvim.builtin.bufferline.active = false
 
 lvim.builtin.project.datapath = vim.fn.stdpath "cache" .. "/lvim"
 lvim.builtin.project.detection_methods = { "lsp", "pattern" }
+lvim.builtin.project.ignore_lsp = { "null-ls" }
+lvim.builtin.project.silent_chdir = true
 
 lvim.builtin.terminal.active = true
 lvim.builtin.terminal.direction = "horizontal"
@@ -26,6 +28,7 @@ lvim.lsp.diagnostics.virtual_text = false
 lvim.lsp.default_keybinds = true
 lvim.lsp.diagnostics.update_in_insert = true
 
+vim.lsp.set_log_level "warn"
 require("vim.lsp.log").set_format_func(vim.inspect)
 
 lvim.lsp.null_ls.setup = {
@@ -33,6 +36,7 @@ lvim.lsp.null_ls.setup = {
   log = {
     level = "warn",
   },
+  root_dir = require("lspconfig").util.root_pattern(".luacheckrc", ".git"),
 }
 
 local code_actions = require "lvim.lsp.null-ls.code_actions"
@@ -52,7 +56,7 @@ lvim.lsp.on_attach_callback = function(_, bufnr)
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 
-vim.list_extend(lvim.lsp.override, { "clangd", "pyright", "sumneko_lua" })
+vim.list_extend(lvim.lsp.override, { "clangd", "pyright" })
 ---}}}
 
 ---{{{ plugins
