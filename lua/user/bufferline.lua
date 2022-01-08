@@ -9,6 +9,8 @@ function M.buf_kill(kill_command, bufnr, force)
     bufnr = api.nvim_get_current_buf()
   end
 
+  kill_command = kill_command or "bd"
+
   -- If buffer is modified and force isn't true, print error and abort
   if not force and bo[bufnr].modified then
     return api.nvim_err_writeln(
@@ -69,9 +71,11 @@ M.setup = function()
       right_mouse_command = "vert sbuffer %d",
       show_close_icon = false,
       show_buffer_icons = true,
-      separator_style = "slant",
-      enforce_regular_tabs = false,
+      separator_style = "thin",
+      enforce_regular_tabs = true,
       always_show_bufferline = true,
+      show_tab_indicators = true,
+      persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
       diagnostics = "nvim-lsp",
       diagnostics_update_in_insert = false,
       offsets = {
