@@ -13,9 +13,8 @@ lvim.keys = {
     -- Move current line / block with Alt-j/k ala vscode.
     ["<A-k>"] = "<Esc>:m .-2<CR>==gi",
 
-    -- save file
-    ["<C-s>"] = "<cmd>w<CR>",
-    ["<C-c>"] = "<ESC>",
+    -- save file and quit insert-mode
+    ["<C-s>"] = "<Esc><cmd>w<CR>",
 
     -- move the cursor
     ["<A-h>"] = "<Left>",

@@ -1,6 +1,6 @@
 -- general
 lvim.log.level = "warn"
--- lvim.log.override_notify = true
+lvim.log.override_notify = true
 lvim.format_on_save = true
 
 ---{{{ builtins
@@ -21,6 +21,7 @@ local components = require "lvim.core.lualine.components"
 lvim.builtin.lualine.sections.lualine_y = { "location" }
 lvim.builtin.lualine.sections.lualine_a = { "filename" }
 lvim.builtin.lualine.sections.lualine_b = { components.branch }
+lvim.builtin.lualine.sections.lualine_c = { components.diff, "lsp_progress" }
 ---}}}
 
 ---{{{ LSP
@@ -80,11 +81,9 @@ lvim.plugins = require "user.plugins"
 ---{{{ scratch
 pcall(require, "scratch")
 local scratch_plugins = {
-  "pwntester/octo.nvim",
-  event = "FIleReadPost",
-  opt = true,
-  cmd = "Octo",
-  disable = true,
+  "arkav/lualine-lsp-progress",
+  opt = false,
+  disable = false,
 }
 
 table.insert(lvim.plugins, scratch_plugins)
