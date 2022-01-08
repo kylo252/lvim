@@ -87,5 +87,4 @@ return {
       require("gitlinker").setup()
     end,
   },
-  { "folke/lua-dev.nvim" },
 }
