@@ -38,13 +38,14 @@ function M.buf_kill(kill_command, bufnr, force)
 
   -- If there is only one buffer (which has to be the current one), vim will
   -- create a new buffer on :bd.
-  -- For more than one buffer, pick the next buffer (wrapping around if necessary)
+  -- For more than one buffer, pick the previous buffer (wrapping around if necessary)
   if #buffers > 1 then
     for i, v in ipairs(buffers) do
       if v == bufnr then
-        local next_buffer = buffers[i % #buffers + 1]
+        local prev_buf_idx = i == 1 and (#buffers - 1) or (i - 1)
+        local prev_buffer = buffers[prev_buf_idx]
         for _, win in ipairs(windows) do
-          api.nvim_win_set_buf(win, next_buffer)
+          api.nvim_win_set_buf(win, prev_buffer)
         end
       end
     end
