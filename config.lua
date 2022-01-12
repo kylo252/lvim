@@ -13,6 +13,7 @@ lvim.builtin.project.ignore_lsp = { "null-ls" }
 lvim.builtin.project.silent_chdir = true
 
 lvim.builtin.terminal.active = true
+lvim.builtin.terminal.open_mapping = "<C-\\>"
 lvim.builtin.terminal.direction = "horizontal"
 
 lvim.builtin.nvimtree.disable_window_picker = 1
@@ -33,11 +34,9 @@ vim.lsp.set_log_level "warn"
 require("vim.lsp.log").set_format_func(vim.inspect)
 
 lvim.lsp.null_ls.setup = {
-  -- debug = true,
   log = {
-    level = "warn",
+    level = "debug",
   },
-  root_dir = require("lspconfig").util.root_pattern(".luacheckrc", ".git"),
 }
 
 local code_actions = require "lvim.lsp.null-ls.code_actions"
