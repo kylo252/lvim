@@ -35,7 +35,7 @@ require("vim.lsp.log").set_format_func(vim.inspect)
 
 lvim.lsp.null_ls.setup = {
   log = {
-    level = "debug",
+    level = "warn",
   },
 }
 
