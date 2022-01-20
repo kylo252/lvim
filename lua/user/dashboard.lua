@@ -24,30 +24,30 @@ local footer = {
 
 local buttons = {
   entries = {
-    { keybind = "<c-r>", description = "  Recently Used Files", command = "<CMD>Telescope oldfiles<CR>" },
-    { keybind = "<c-f>", description = "  Find File", command = "<CMD>Telescope find_files<CR>" },
-    { keybind = "<c-n>", description = "  New File", command = "<CMD>ene!<CR>" },
-    { keybind = "<c-j>", description = "  Recent Places", command = "<CMD>Telescope zoxide list<CR>" },
-    { keybind = "<c-t>", description = "  Find Word", command = "<CMD>Telescope live_grep<CR>" },
+    { "<c-r>", "  Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
+    { "<c-f>", "  Find File", "<CMD>Telescope find_files<CR>" },
+    { "<c-n>", "  New File", "<CMD>ene!<CR>" },
+    { "<c-j>", "  Recent Places", "<CMD>Telescope zoxide list<CR>" },
+    { "<c-t>", "  Find Word", "<CMD>Telescope live_grep<CR>" },
     {
-      keybind = "SPC p",
-      description = "  Plugins ",
-      command = ":edit ~/.config/lvim/lua/user/plugins.lua<cr>",
+      "SPC p",
+      "  Plugins ",
+      ":edit ~/.config/lvim/lua/user/plugins.lua<cr>",
     },
     {
-      keybind = "SPC s",
-      description = "  Scratch",
-      command = "<CMD>edit " .. scratch_file .. " <CR>",
+      "SPC s",
+      "  Scratch",
+      "<CMD>edit " .. scratch_file .. " <CR>",
     },
     {
-      keybind = "SPC R",
-      description = "  Load Last Session",
-      command = "<CMD>lua require('persistence').load({ last = true })<cr>",
+      "SPC R",
+      "  Load Last Session",
+      "<CMD>lua require('persistence').load({ last = true })<cr>",
     },
   },
 }
 
-local conf = {
+local section = {
   header = header,
   footer = footer,
   buttons = buttons,
@@ -59,15 +59,15 @@ function M.setup()
 
   dashboard.section.buttons.val = {}
 
-  for _, entry in pairs(conf.buttons.entries) do
+  for _, entry in pairs(section.buttons.entries) do
     local button = require("alpha.themes.dashboard").button
-    table.insert(dashboard.section.buttons.val, button(entry.keybind, entry.description, entry.command))
+    table.insert(dashboard.section.buttons.val, button(entry[1], entry[2], entry[3]))
   end
 
-  dashboard.section.header.val = conf.header.val
-  dashboard.section.header.opts.hl = conf.header.opts.hl
+  dashboard.section.header.val = section.header.val
+  dashboard.section.header.opts.hl = section.header.opts.hl
   -- dashboard.section.footer.val = conf.footer.val
-  alpha.setup(dashboard.opts)
+  alpha.setup(dashboard.config)
 end
 
 return M
