@@ -1,17 +1,4 @@
 local M = {}
-
-function _G.dump(...)
-  local objects = vim.tbl_map(vim.inspect, { ... })
-  print(unpack(objects))
-  return ...
-end
-
-function _G.log_q(...)
-  local objects = vim.tbl_map(vim.inspect, { ... })
-  local log = require("plenary.log").new { plugin = "quick", use_console = "sync", level = "debug", info_level = 5 }
-  return log.info(unpack(objects))
-end
-
 vim.cmd [[
 function! Dump(cmd)
   redir => message
@@ -49,9 +36,44 @@ function M.copy_help_url()
     return ""
   end
 
-  local url = string.format("https://neovim.io/doc/user/%s.html#%s", vim.fn.expand "%:t:r", last_search_query())
-  vim.api.nvim_command("let @+ = '" .. url .. "'")
-  print("copied: " .. url)
+  local help_url = string.format("https://neovim.io/doc/user/%s.html#%s", vim.fn.expand "%:t:r", last_search_query())
+  vim.notify(help_url, vim.log.levels.INFO, { title = "help url" })
+  vim.fn.setreg("+", help_url)
+end
+
+function M.get_blame_url()
+  local repo_url = require("gitlinker").get_repo_url { print_url = false }
+
+  local win_id = vim.api.nvim_get_current_win()
+  local cur_pos = vim.api.nvim_win_get_cursor(win_id)
+  local filename = vim.fn.expand "%"
+  local repo = require("lspconfig.util").find_git_ancestor(vim.fn.expand "%:p")
+  local lnum = cur_pos[2] + 1
+  local args = { "log", "-L" .. lnum .. "," .. lnum + 1 .. ":" .. filename, "--pretty=%H", "--no-patch" }
+  local job = require("plenary.job"):new { command = "git", args = args, cwd = repo }
+  local commit_url
+  job:after_success(function(this_job)
+    local commit_sha = this_job:result()[1]
+    commit_url = repo_url .. "/commit/" .. commit_sha
+    vim.schedule(function()
+      vim.notify(commit_url, vim.log.levels.INFO, { title = "commit url" })
+      vim.fn.setreg("+", commit_url)
+    end)
+  end)
+  job:start()
+end
+
+function _G.dump(...)
+  local objects = vim.tbl_map(vim.inspect, { ... })
+  print(unpack(objects))
+  return ...
+end
+
+function _G.log_entry(...)
+  local objects = vim.tbl_map(vim.inspect, { ... })
+  local Log = require "lvim.core.log"
+  Log:info(table.concat(objects, ", "))
+  return ...
 end
 
 function _G.require_clean(m)

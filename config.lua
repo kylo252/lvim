@@ -7,7 +7,7 @@ lvim.format_on_save = true
 lvim.builtin.notify.active = true
 lvim.builtin.bufferline.active = false
 
-lvim.builtin.project.datapath = vim.fn.stdpath "cache" .. "/lvim"
+lvim.builtin.project.datapath = get_cache_dir()
 lvim.builtin.project.detection_methods = { "lsp", "pattern" }
 lvim.builtin.project.ignore_lsp = { "null-ls" }
 lvim.builtin.project.silent_chdir = true

@@ -49,14 +49,15 @@ lvim.builtin.which_key.mappings = {
     M = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
     N = { "<cmd>Telescope live_grep theme=get_ivy cwd=$XDG_DATA_HOME/neovim/runtime/lua<CR>", "Neovim lua runtime" },
     R = { "<cmd>Telescope oldfiles theme=get_ivy<CR>", "Find recent files" },
+    P = { "<cmd>Telescope projects theme=get_ivy<CR>", "Find recent projects" },
   },
   g = {
     name = "+git",
     b = { "<cmd>Telescope git_bcommits theme=get_ivy<cr>", "Buffers commits" },
-    c = {
-      b = {
-        '<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".copy_to_clipboard })<cr>',
-        "Copy buffer URL",
+    Y = {
+      r = {
+        '<cmd>lua require"gitlinker".get_repo_url()<cr>',
+        "Copy repo URL",
       },
     },
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
