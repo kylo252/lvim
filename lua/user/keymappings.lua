@@ -96,6 +96,9 @@ lvim.keys = {
 
   ---@usage change or add keymappings for visual block mode
   visual_block_mode = {
+    -- Allow pasting same thing many times
+    ["p"] = '""p:let @"=@0<CR>',
+
     -- Move selected line / block of text in visual mode
     ["K"] = ":move '<-2<CR>gv-gv",
     ["J"] = ":move '>+1<CR>gv-gv",

@@ -1,5 +1,5 @@
 -- general
-lvim.log.level = "warn"
+lvim.log.level = "info"
 lvim.log.override_notify = true
 lvim.format_on_save = true
 
@@ -79,11 +79,11 @@ lvim.plugins = require "user.plugins"
 
 ---{{{ scratch
 pcall(require, "scratch")
-local scratch_plugins = {
+
+table.insert(lvim.plugins, {
   "arkav/lualine-lsp-progress",
   opt = false,
   disable = false,
-}
+})
 
-table.insert(lvim.plugins, scratch_plugins)
 ---}}}
