@@ -5,7 +5,6 @@ lvim.format_on_save = true
 
 ---{{{ builtins
 lvim.builtin.notify.active = true
-lvim.builtin.bufferline.active = false
 
 lvim.builtin.project.datapath = get_cache_dir()
 lvim.builtin.project.detection_methods = { "lsp", "pattern" }

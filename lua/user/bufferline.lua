@@ -58,49 +58,4 @@ function M.buf_kill(kill_command, bufnr, force)
   end
 end
 
-M.setup = function()
-  require("bufferline").setup {
-    highlights = {
-      background = {
-        gui = "italic",
-      },
-      buffer_selected = {
-        gui = "bold",
-      },
-    },
-    options = {
-      right_mouse_command = "vert sbuffer %d",
-      show_close_icon = false,
-      show_buffer_icons = true,
-      separator_style = "thin",
-      enforce_regular_tabs = true,
-      always_show_bufferline = true,
-      show_tab_indicators = true,
-      persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-      diagnostics = "nvim-lsp",
-      diagnostics_update_in_insert = false,
-      offsets = {
-        {
-          filetype = "NvimTree",
-          text = "Explorer",
-          -- highlight = "PanelHeading",
-          padding = 1,
-        },
-        {
-          filetype = "DiffviewFiles",
-          text = "Diff View",
-          highlight = "PanelHeading",
-          padding = 1,
-        },
-        {
-          filetype = "packer",
-          text = "Packer",
-          highlight = "PanelHeading",
-          padding = 1,
-        },
-      },
-    },
-  }
-end
-
 return M
