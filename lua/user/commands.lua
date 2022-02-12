@@ -1,3 +1,42 @@
-vim.cmd [[command! -nargs=1 GS :lua require("telescope.builtin").grep_string(require("telescope.themes").get_dropdown({ prompt_title = "Fuzzy grep string " .. "<args>", search = "<args>" }))]]
-vim.cmd [[ command! -nargs=* FuzzyGrepString :lua require('core.telescope.custom-actions').fuzzy_grep_string(<f-args>) ]]
-vim.cmd [[ command! FindRuntimeFiles :lua require('core.telescope.custom-finders').find_runtime_files() ]]
+local M = {}
+
+function M.load_commands(collection)
+  local common_opts = { bang = true, force = true }
+  for _, cmd in pairs(collection) do
+    vim.api.nvim_add_user_command(cmd.name, cmd.fn, cmd.opts or common_opts)
+  end
+end
+
+local commands = {
+  {
+    name = "Grep",
+    fn = function(nargs)
+      require("user.telescope.custom-finders").chained_live_grep(nargs)
+    end,
+    opts = { bang = true, nargs = "*", force = true },
+  },
+  { name = "FindRuntimeFiles", fn = require("user.telescope.custom-finders").find_runtime_files },
+  {
+    name = "FuzzyGrepString",
+    fn = require("user.telescope.custom-finders").fuzzy_grep_string,
+    opts = { bang = true, nargs = "*", force = true },
+  },
+  {
+    name = "SessionLoad",
+    fn = function(nargs)
+      require("user.sessions").load_session(nargs.args)
+    end,
+    opts = { bang = true, nargs = "*", force = true },
+  },
+  {
+    name = "SessionSave",
+    fn = function(nargs)
+      require("user.sessions").save_session(nargs.args)
+    end,
+    opts = { bang = true, nargs = "*", force = true },
+  },
+}
+
+M.load_commands(commands)
+
+return M
