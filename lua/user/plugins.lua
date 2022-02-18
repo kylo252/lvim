@@ -87,18 +87,7 @@ return {
     ft = "norg",
     after = "nvim-treesitter", -- You may want to specify Telescope here as well
     config = function()
-      require("neorg").setup {
-        load = {
-          ["core.defaults"] = {},
-          ["core.norg.dirman"] = {
-            config = {
-              workspaces = {
-                notes = "~/notes",
-              },
-            },
-          },
-        },
-      }
+      require("user.neorg").setup()
     end,
   },
 }
