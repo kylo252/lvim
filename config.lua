@@ -1,7 +1,13 @@
 -- general
 lvim.log.level = "info"
 lvim.log.override_notify = true
-lvim.format_on_save = true
+
+lvim.format_on_save = {
+  ---@usage pattern string pattern used for the autocommand (Default: '*')
+  pattern = "*.lua",
+  ---@usage timeout number timeout in ms for the format request (Default: 1000)
+  timeout = 1000,
+}
 
 ---{{{ builtins
 lvim.builtin.notify.active = true
@@ -81,6 +87,18 @@ pcall(require, "scratch")
 
 table.insert(lvim.plugins, {
   "arkav/lualine-lsp-progress",
+  opt = false,
+  disable = false,
+})
+
+table.insert(lvim.plugins, {
+  "danymat/neogen",
+  config = function()
+    require("neogen").setup {
+      enable = true,
+      input_after_command = true,
+    }
+  end,
   opt = false,
   disable = false,
 })
