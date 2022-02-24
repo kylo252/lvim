@@ -11,7 +11,7 @@ return {
   },
   {
     "kevinhwang91/nvim-bqf",
-    event = "BufRead",
+    event = "BufReadPost",
     config = function()
       require("bqf").setup {
         auto_enable = true,
@@ -31,7 +31,7 @@ return {
   },
   {
     "ggandor/lightspeed.nvim",
-    event = "BufWinEnter",
+    event = "BufReadPost",
     config = function()
       require("user.lightspeed").setup()
     end,
@@ -39,7 +39,7 @@ return {
   -- TMUX and session management
   {
     "aserowy/tmux.nvim",
-    event = "BufRead",
+    event = "BufReadPost",
     config = function()
       require("user.tmux").setup()
     end,
@@ -47,14 +47,13 @@ return {
   -- UI
   {
     "goolord/alpha-nvim",
-    event = "BufWinEnter",
     config = function()
       require("user.dashboard").setup()
     end,
   },
   {
     "karb94/neoscroll.nvim",
-    event = "BufRead",
+    event = "BufReadPost",
     config = function()
       require("neoscroll").setup { respect_scrolloff = true }
     end,
@@ -69,7 +68,7 @@ return {
   -- GIT
   {
     "ruifm/gitlinker.nvim",
-    event = "BufWinEnter",
+    event = "BufReadPost",
     config = function()
       require("gitlinker").setup()
     end,
@@ -81,6 +80,7 @@ return {
     config = function()
       require("user.sniprun").setup()
     end,
+    event = "BufReadPost",
   },
   {
     "nvim-neorg/neorg",

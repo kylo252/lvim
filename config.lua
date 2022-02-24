@@ -13,6 +13,7 @@ lvim.format_on_save = {
 lvim.builtin.notify.active = true
 
 lvim.builtin.project.datapath = get_cache_dir()
+lvim.builtin.project.manual_mode = false
 lvim.builtin.project.detection_methods = { "lsp", "pattern" }
 lvim.builtin.project.ignore_lsp = { "null-ls" }
 lvim.builtin.project.silent_chdir = true
@@ -84,6 +85,9 @@ lvim.plugins = require "user.plugins"
 ---}}}
 
 ---{{{ scratch
+vim.g.do_filetype_lua = 1
+vim.g.did_load_filetypes = 0
+
 pcall(require, "scratch")
 
 table.insert(lvim.plugins, {
