@@ -22,8 +22,6 @@ lvim.builtin.terminal.active = true
 lvim.builtin.terminal.open_mapping = "<C-\\>"
 lvim.builtin.terminal.direction = "horizontal"
 
-lvim.builtin.nvimtree.disable_window_picker = 1
-
 local components = require "lvim.core.lualine.components"
 lvim.builtin.lualine.sections.lualine_y = { "location" }
 lvim.builtin.lualine.sections.lualine_a = { "filename" }
