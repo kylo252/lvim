@@ -58,7 +58,7 @@ lvim.keys = {
     ["<C-p>"] = "<cmd>Telescope find_files theme=get_ivy<CR>",
 
     -- no one cares about ex mode
-    ["<S-q>"] = "<cmd>lua require('user.bufferline').buf_kill('bd')<cr>",
+    ["<S-q>"] = "<cmd>BufferKill<cr>",
   },
 
   ---@usage change or add keymappings for terminal mode
