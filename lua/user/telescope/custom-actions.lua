@@ -1,11 +1,8 @@
 local M = {}
 
-local _, actions = pcall(require, "telescope.actions")
-local _, action_state = pcall(require, "telescope.actions.state")
-local _, builtin = pcall(require, "telescope.builtin")
-local _, themes = pcall(require, "telescope.themes")
-
 M.import_entry = function(prompt_bufnr)
+  local _, actions = pcall(require, "telescope.actions")
+  local _, action_state = pcall(require, "telescope.actions.state")
   local current_picker = actions.get_current_picker(prompt_bufnr)
   local entry = action_state.get_selected_entry()
 
@@ -20,6 +17,7 @@ M.import_entry = function(prompt_bufnr)
 end
 
 M.tmux_start_project = function()
+  local _, action_state = pcall(require, "telescope.actions.state")
   local query = action_state.get_selected_entry()
   if query == false then
     return
@@ -38,54 +36,40 @@ M.tmux_start_project = function()
   Job:new(tmux_cmd):start()
 end
 
-M.run_telescope_command = function(request)
-  local command
-  if request == "files" then
-    command = builtin.find_files
-  elseif request == "grep" then
-    command = builtin.live_grep
-  end
-  return function(selection)
-    command { cwd = selection.path }
-  end
-end
+---Run a builtin pickers based on opts.next_picker
+---@param prompt_bufnr number: the prompt bufnr
+---@param opts table: options
+---@field next_picker string the name of the next picker to execute, e.g. "find_files"
+---@field entry_cb function can be used to modify the current options, e.g. modify `opts.cwd` based on selection
+M.run_builtin = function(prompt_bufnr, opts)
+  local _, actions = pcall(require, "telescope.actions")
+  -- make sure the options are cleanly separated
+  local picker_opts = vim.deepcopy(opts)
 
-M.fuzzy_filter_results = function()
-  local query = action_state.get_current_line()
+  picker_opts.next_picker = nil
+  picker_opts.entry_cb = nil
 
-  if not query then
-    print "no matching results"
-    return
+  if opts.entry_cb and type(opts.entry_cb) == "function" then
+    picker_opts = vim.tbl_deep_extend("force", picker_opts, opts.entry_cb(prompt_bufnr, opts))
   end
 
-  vim.fn.histadd("search", query)
-  -- print(vim.inspect(entry))
-  builtin.grep_string {
-    search = query,
-    prompt_title = "Filter",
-    prompt_prefix = "/" .. query .. " >> ",
-    preview_title = "Preview",
-    layout_config = {
-      prompt_position = "bottom",
-    },
-  }
-  vim.cmd [[normal! A]]
-end
+  actions._close(prompt_bufnr, true)
 
-M.find_in_dir = function(_, opts)
-  local entry = action_state.get_selected_entry()
-  opts = opts or themes.get_ivy()
-  opts.cwd = entry.value
-  builtin.find_files(opts)
-  vim.cmd [[normal! A]]
-end
+  -- until https://github.com/nvim-telescope/telescope.nvim/pull/1600
+  vim.schedule(function()
+    vim.cmd [[startinsert!]]
+  end)
 
-M.grep_in_dir = function(_, opts)
-  local entry = action_state.get_selected_entry()
-  opts = opts or themes.get_ivy()
-  opts.cwd = entry.value
-  builtin.live_grep(opts)
-  vim.cmd [[normal! A]]
+  if string.match(opts.next_picker, " : ") then
+    -- Call appropriate function from extensions
+    local split_string = vim.split(opts.next_picker, " : ")
+    local ext = split_string[1]
+    local func = split_string[2]
+    require("telescope").extensions[ext][func](picker_opts)
+  else
+    -- Call appropriate telescope builtin
+    require("telescope.builtin")[opts.next_picker](picker_opts)
+  end
 end
 
 return M
