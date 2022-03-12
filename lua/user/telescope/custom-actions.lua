@@ -36,11 +36,6 @@ M.tmux_start_project = function()
   Job:new(tmux_cmd):start()
 end
 
----Run a builtin pickers based on opts.next_picker
----@param prompt_bufnr number: the prompt bufnr
----@param opts table: options
----@field next_picker string the name of the next picker to execute, e.g. "find_files"
----@field entry_cb function can be used to modify the current options, e.g. modify `opts.cwd` based on selection
 M.run_builtin = function(prompt_bufnr, opts)
   local _, actions = pcall(require, "telescope.actions")
   -- make sure the options are cleanly separated

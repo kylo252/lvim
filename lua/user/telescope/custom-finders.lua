@@ -241,7 +241,7 @@ function M.dynamic_grep(opts)
       local dynamic_filetype = function()
         local entry = action_state.get_selected_entry()
         local onlytype = vim.fn.fnamemodify(entry.filename, ":e")
-        opts.prompt_prefix = opts.prompt_prefix or "*." .. onlytype .. " >> "
+        opts.prompt_prefix = opts.prompt_prefix or ("*." .. onlytype .. " >> ")
         opts.prompt_title = "Scoped Results"
         vim.list_extend(opts.vimgrep_arguments, { "--type=" .. onlytype })
 
@@ -253,7 +253,7 @@ function M.dynamic_grep(opts)
         local entry = action_state.get_selected_entry()
         local skiptype = vim.fn.fnamemodify(entry.filename, ":e")
         opts.vimgrep_arguments = vim.deepcopy(config.values.vimgrep_arguments)
-        opts.prompt_prefix = opts.prompt_prefix or "!*." .. skiptype .. " >> "
+        opts.prompt_prefix = opts.prompt_prefix or ("!*." .. skiptype .. " >> ")
         opts.prompt_title = "Scoped Results"
         vim.list_extend(opts.vimgrep_arguments, { "--type-not=" .. skiptype })
 
