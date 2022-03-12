@@ -1,0 +1,15 @@
+{
+  "zt": {
+    "description": "zettel template",
+    "prefix": "zt",
+    "body": [
+      "---",
+      "title: ${1}",
+      "tags: ${2}",
+      "---",
+      "",
+      "- ${0}",
+      ""
+    ]
+  }
+}
