@@ -111,5 +111,4 @@ table.insert(lvim.plugins, {
   opt = false,
   disable = false,
 })
-
 ---}}}
