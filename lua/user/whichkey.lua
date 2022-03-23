@@ -194,3 +194,61 @@ lvim.builtin.which_key.vmappings = {
   ["/"] = { "<ESC><CMD>lua require('Comment.api').gc(vim.fn.visualmode())<CR>", "Comment" },
   ["lf"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "Format" },
 }
+
+local select_labels = {
+  ["af"] = "@function.outer",
+  ["if"] = "@function.inner",
+  ["ak"] = "@comment.outer",
+  ["ac"] = "@class.outer",
+  ["ic"] = "@class.inner",
+  ["aa"] = "@parameter.inner", -- "ap" is already used
+  ["ia"] = "@parameter.outer", -- "ip" is already used
+  ["iF"] = "(function_definition) @function",
+}
+
+local move_labels = {
+  ["]m"] = "@function.outer",
+  ["]]"] = "@class.outer",
+  ["]M"] = "@function.outer",
+  ["]["] = "@class.outer",
+  ["[m"] = "@function.outer",
+  ["[["] = "@class.outer",
+  ["[M"] = "@function.outer",
+  ["[]"] = "@class.outer",
+}
+
+local lsp_ts_labels = {
+  ["gpof"] = "@function.outer",
+  ["gpoc"] = "@class.outer",
+}
+
+local setup_opts = {
+  plugins = {
+    marks = true, -- shows a list of your marks on ' and `
+    registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+    -- the presets plugin, adds help for a bunch of default keybindings in Neovim
+    -- No actual key bindings are created
+    presets = { -- adds help for operators like d, y, ...
+      operators = {
+        v = false,
+        d = false,
+      },
+      motions = false, -- adds help for motions
+      text_objects = false, -- help for text objects triggered after entering an operator
+      windows = true, -- default bindings on <c-w>
+      nav = true, -- misc bindings to work with windows
+      z = true, -- bindings for folds, spelling and others prefixed with z
+      g = true, -- bindings for prefixed with g
+    },
+  },
+  hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
+  show_help = true, -- show help message on the command line when the popup is visible
+}
+
+lvim.builtin.which_key.setup = setup_opts
+
+lvim.builtin.which_key.on_config_done = function(wk)
+  wk.register(select_labels, { mode = "o", prefix = "", preset = true })
+  wk.register(move_labels, { mode = "n", prefix = "", preset = true })
+  wk.register(lsp_ts_labels, { mode = "n", prefix = "", preset = true })
+end
