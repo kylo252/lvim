@@ -77,6 +77,10 @@ for module, _ in pairs(package.loaded) do
   end
 end
 
+lvim.autocommands.custom_groups = {
+  { "DirChanged", "*", "lua require('user.utils').on_dir_changed()" },
+}
+
 require "user.keymappings"
 require "user.settings"
 require "user.whichkey"
