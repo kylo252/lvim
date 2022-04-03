@@ -43,20 +43,7 @@ lvim.lsp.diagnostics.update_in_insert = true
 vim.lsp.set_log_level "warn"
 require("vim.lsp.log").set_format_func(vim.inspect)
 
-lvim.lsp.null_ls.setup = {
-  log = {
-    level = "warn",
-  },
-}
-
-local code_actions = require "lvim.lsp.null-ls.code_actions"
-code_actions.setup {
-  { name = "gitsigns" },
-}
-
-require("nvim-lsp-installer").settings {
-  log_level = vim.log.levels.WARN,
-}
+vim.list_extend(lvim.lsp.override, { "clangd", "pyright" })
 
 lvim.lsp.on_attach_callback = function(_, bufnr)
   local function buf_set_option(...)
@@ -66,7 +53,34 @@ lvim.lsp.on_attach_callback = function(_, bufnr)
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 
-vim.list_extend(lvim.lsp.override, { "clangd", "pyright" })
+require("nvim-lsp-installer").settings {
+  log_level = vim.log.levels.WARN,
+}
+
+lvim.lsp.null_ls.setup = {
+  log = {
+    level = "warn",
+  },
+}
+
+local formatters = require "lvim.lsp.null-ls.formatters"
+local linters = require "lvim.lsp.null-ls.linters"
+local code_actions = require "lvim.lsp.null-ls.code_actions"
+
+formatters.setup { { command = "shfmt", extra_args = { "-i", "2", "-ci", "-bn" } }, { command = "stylua" } }
+
+linters.setup {
+  { command = "shellcheck" },
+  {
+    command = "luacheck",
+    cwd = function(params) -- force luacheck to find its '.luacheckrc' file
+      local u = require "null-ls.utils"
+      return u.root_pattern ".luacheckrc"(params.bufname)
+    end,
+  },
+}
+
+code_actions.setup { { name = "shellcheck" } }
 ---}}}
 
 ---{{{ plugins
@@ -94,10 +108,10 @@ lvim.plugins = require "user.plugins"
 ---}}}
 
 ---{{{ scratch
+pcall(require, "scratch")
+
 vim.g.do_filetype_lua = 1
 vim.g.did_load_filetypes = 0
-
-pcall(require, "scratch")
 
 table.insert(lvim.plugins, {
   "arkav/lualine-lsp-progress",
@@ -105,15 +119,4 @@ table.insert(lvim.plugins, {
   disable = false,
 })
 
-table.insert(lvim.plugins, {
-  "danymat/neogen",
-  config = function()
-    require("neogen").setup {
-      enable = true,
-      input_after_command = true,
-    }
-  end,
-  opt = false,
-  disable = false,
-})
 ---}}}

@@ -84,4 +84,16 @@ return {
       require("user.neorg").setup()
     end,
   },
+  {
+    "danymat/neogen",
+    config = function()
+      require("neogen").setup {
+        enable = true,
+        input_after_command = true,
+      }
+    end,
+    requires = "nvim-treesitter/nvim-treesitter",
+    opt = true,
+  },
+  ---}}}
 }
