@@ -199,10 +199,17 @@ function M.find_files_local(opts)
   require("telescope.builtin").find_files(opts)
 end
 
-function M.find_project_files()
-  local ok = pcall(builtin.git_files)
+function M.find_project_files(opts)
+  opts = opts or {}
+  local theme_opts = themes.get_ivy {
+    hidden = true,
+  }
+  opts = vim.tbl_deep_extend("force", theme_opts, opts)
+  local ok = pcall(function()
+    builtin.git_files(opts)
+  end)
   if not ok then
-    builtin.find_files()
+    builtin.find_files(opts)
   end
 end
 

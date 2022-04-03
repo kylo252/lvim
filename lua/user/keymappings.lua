@@ -55,7 +55,7 @@ lvim.keys = {
     ["<F2>"] = ":%s@<c-r><c-w>@<c-r><c-w>@gc<c-f>$F@i",
 
     --find files
-    ["<C-p>"] = "<cmd>Telescope find_files theme=get_ivy<CR>",
+    ["<C-p>"] = "<cmd>lua require('user.telescope.custom-finders').find_project_files()<CR>",
 
     -- no one cares about ex mode
     ["<S-q>"] = "<cmd>BufferKill<cr>",
