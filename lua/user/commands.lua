@@ -3,7 +3,7 @@ local M = {}
 function M.load_commands(collection)
   local common_opts = { bang = true, force = true }
   for _, cmd in pairs(collection) do
-    vim.api.nvim_add_user_command(cmd.name, cmd.fn, cmd.opts or common_opts)
+    vim.api.nvim_create_user_command(cmd.name, cmd.fn, cmd.opts or common_opts)
   end
 end
 

@@ -43,7 +43,7 @@ lvim.lsp.diagnostics.update_in_insert = true
 vim.lsp.set_log_level "warn"
 require("vim.lsp.log").set_format_func(vim.inspect)
 
-vim.list_extend(lvim.lsp.override, { "clangd", "pyright" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd", "pyright" })
 
 lvim.lsp.on_attach_callback = function(_, bufnr)
   local function buf_set_option(...)
