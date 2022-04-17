@@ -1,8 +1,10 @@
+---@diagnostic disable
 -- vim: ft=lua tw=80
 
 stds.nvim = {
   globals = {
     "lvim",
+    -- "package",
     vim = { fields = { "g" } },
     "TERMINAL",
     "USER",
@@ -19,13 +21,12 @@ stds.nvim = {
     "os",
     "vim",
     "join_paths",
-    "dump",
     "get_runtime_dir",
     "get_config_dir",
     "get_cache_dir",
     "get_lvim_base_dir",
-    "get_version",
-    -- vim = { fields = { "cmd", "api", "fn", "o" } },
+    "require_clean",
+    "dump"
   },
 }
 std = "lua51+nvim"

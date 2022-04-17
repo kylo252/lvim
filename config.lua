@@ -67,7 +67,11 @@ local formatters = require "lvim.lsp.null-ls.formatters"
 local linters = require "lvim.lsp.null-ls.linters"
 local code_actions = require "lvim.lsp.null-ls.code_actions"
 
-formatters.setup { { command = "shfmt", extra_args = { "-i", "2", "-ci", "-bn" } }, { command = "stylua" } }
+formatters.setup {
+  { command = "shfmt", extra_args = { "-i", "2", "-ci", "-bn" } },
+  { command = "stylua" },
+  -- { command = "prettier" },
+}
 
 linters.setup {
   { command = "shellcheck" },
@@ -119,4 +123,11 @@ table.insert(lvim.plugins, {
   disable = false,
 })
 
+table.insert(lvim.plugins, {
+  "norcalli/nvim-colorizer.lua",
+  config = function()
+    require("colorizer").setup({ "css", "scss", "html", "javascript" }, {})
+  end,
+})
+vim.keymap.set("n", "k", [[(v:count > 1 ? "m'" . v:count : '') . 'k']], { expr = true })
 ---}}}

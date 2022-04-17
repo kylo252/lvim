@@ -75,10 +75,12 @@ return {
       require("user.sniprun").setup()
     end,
     event = "BufReadPost",
+    opt = true,
   },
   {
     "nvim-neorg/neorg",
     ft = "norg",
+    opt = true,
     after = "nvim-treesitter", -- You may want to specify Telescope here as well
     config = function()
       require("user.neorg").setup()
