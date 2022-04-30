@@ -217,8 +217,10 @@ function M.dynamic_grep(opts)
   opts = opts or themes.get_ivy {}
   opts.vimgrep_arguments = opts.vimgrep_arguments or vim.deepcopy(config.values.vimgrep_arguments)
 
-  local type = string.match(opts.args, "type=(%w+)", 1)
-  local glob = string.match(opts.args, "glob=(%w+)", 1)
+  opts.args = opts.args or ""
+
+  local type = string.match(opts.args, "[t|ft|type]=(%S+)", 1)
+  local glob = string.match(opts.args, "[g|glob]=(%S+)", 1)
 
   if type then
     opts.vimgrep_arguments[#opts.vimgrep_arguments + 1] = "--type=" .. type
@@ -286,4 +288,5 @@ function M.dynamic_grep(opts)
     end,
   }, opts))
 end
+
 return M

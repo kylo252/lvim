@@ -17,9 +17,9 @@ function M.set_tmux_win_title(pattern)
     :start()
 end
 
-lvim.autocommands.custom_groups = {
-  { "BufEnter", "*", "lua require('user.tmux').set_tmux_win_title('%:t')" },
-}
+-- lvim.autocommands.custom_groups = {
+--   { "BufEnter", "*", "lua require('user.tmux').set_tmux_win_title('%:t')" },
+-- }
 
 function M.setup()
   require("tmux").setup {

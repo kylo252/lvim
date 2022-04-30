@@ -12,6 +12,9 @@ lvim.format_on_save = {
 ---{{{ builtins
 lvim.builtin.notify.active = true
 
+lvim.builtin.comment.mappings["extra"] = true
+lvim.builtin.comment.mappings["extended"] = true
+
 lvim.builtin.project.datapath = get_cache_dir()
 lvim.builtin.project.manual_mode = false
 lvim.builtin.project.detection_methods = { "lsp", "pattern" }
@@ -129,5 +132,4 @@ table.insert(lvim.plugins, {
     require("colorizer").setup({ "css", "scss", "html", "javascript" }, {})
   end,
 })
-vim.keymap.set("n", "k", [[(v:count > 1 ? "m'" . v:count : '') . 'k']], { expr = true })
 ---}}}
