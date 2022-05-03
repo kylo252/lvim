@@ -48,12 +48,7 @@ M.run_builtin = function(prompt_bufnr, opts)
     picker_opts = vim.tbl_deep_extend("force", picker_opts, opts.entry_cb(prompt_bufnr, opts))
   end
 
-  actions._close(prompt_bufnr, true)
-
-  -- until https://github.com/nvim-telescope/telescope.nvim/pull/1600
-  vim.schedule(function()
-    vim.cmd [[startinsert!]]
-  end)
+  actions.close(prompt_bufnr)
 
   if string.match(opts.next_picker, " : ") then
     -- Call appropriate function from extensions
