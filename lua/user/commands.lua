@@ -26,14 +26,24 @@ local commands = {
     fn = function(nargs)
       require("user.sessions").load_session(nargs.args)
     end,
-    opts = { bang = true, nargs = "*", force = true },
+    opts = {
+      bang = true,
+      nargs = "?",
+      complete = require("user.sessions").get_sessions,
+      force = true,
+    },
   },
   {
     name = "SessionSave",
     fn = function(nargs)
       require("user.sessions").save_session(nargs.args)
     end,
-    opts = { bang = true, nargs = "*", force = true },
+    opts = {
+      bang = true,
+      nargs = "?",
+      complete = require("user.sessions").get_sessions,
+      force = true,
+    },
   },
 }
 
