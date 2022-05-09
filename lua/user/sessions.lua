@@ -10,6 +10,11 @@ local function join_paths(...)
   return result
 end
 
+local function is_directory(filename)
+  local stat = vim.loop.fs_stat(filename)
+  return stat and stat.type == "directory" or false
+end
+
 local default_session_name = function()
   -- get the cwd but strip the homeprefix and replace the path_sep with underscores
   local def_name = fnamemodify(vim.fn.getcwd(), ":~:?")
@@ -26,7 +31,7 @@ local defaults = {
   default_session_name = default_session_name,
 }
 
-function M.get_session_path(name)
+local function get_session_path(name)
   name = name or defaults.default_session_name()
   return fnameescape(join_paths(defaults.dir, name .. ".vim"))
 end
@@ -35,29 +40,33 @@ function M.save_session(name)
   -- readability: replace the expanded homedir
   local tmp = vim.o.sessionoptions
   vim.o.sessionoptions = table.concat(defaults.options, ",")
-  vim.cmd("mks! " .. M.get_session_path(name))
+  vim.cmd("mks! " .. get_session_path(name))
   vim.o.sessionoptions = tmp
 end
 
-function M.load_session_by_name(name)
+function M.get_sessions()
+  if not is_directory(defaults.dir) then
+    vim.fn.mkdir(defaults.dir, "p")
+  end
+  return vim.tbl_map(function(v)
+    local basename = fnamemodify(v, ":t:r")
+    return basename
+  end, vim.fn.glob(defaults.dir .. "/*", false, true))
+end
+
+local function load_session_by_name(name)
   vim.validate { requested = { name, "s", true } }
-  local full_path = M.get_session_path(name)
+  local full_path = get_session_path(name)
   vim.schedule(function()
     vim.cmd("source " .. full_path)
   end)
-end
-
-function M.get_sessions()
-  return vim.tbl_map(function(v)
-    return fnamemodify(v, ":t:r")
-  end, vim.fn.glob(defaults.dir .. "/*", false, true))
 end
 
 function M.load_session(name)
   name = name or ""
 
   if name ~= "" then
-    M.load_session_by_name(name)
+    load_session_by_name(name)
     return
   end
 
@@ -70,7 +79,7 @@ function M.load_session(name)
       actions.select_default:replace(function()
         local entry = action_state.get_selected_entry()
         actions.close(prompt_bufnr)
-        M.load_session_by_name(entry.value)
+        load_session_by_name(entry.value)
       end)
       return true
     end,

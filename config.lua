@@ -108,7 +108,7 @@ require "user.whichkey"
 require "user.dashboard"
 require "user.telescope"
 require "user.utils"
-require "user.commands"
+require("user.commands").setup()
 require "user.treesitter"
 
 lvim.plugins = require "user.plugins"
