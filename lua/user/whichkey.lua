@@ -14,8 +14,8 @@ lvim.builtin.which_key.mappings = {
   },
   d = {
     name = "+dotfiles",
-    d = { "<cmd>lua require('user.telescope.custom-finders').find_dotfiles()<CR>", "Find dotfiles" },
-    g = { "<cmd>lua require('user.telescope.custom-finders').grep_dotfiles()<CR>", "Find dotfiles" },
+    d = { require("user.telescope.custom-finders").find_dotfiles, "Find dotfiles" },
+    g = { require("user.telescope.custom-finders").grep_dotfiles, "Find dotfiles" },
   },
   e = { "<cmd>NvimTreeToggle<CR>", "NvimTree" },
   f = {
@@ -72,11 +72,10 @@ lvim.builtin.which_key.mappings = {
     S = { "<cmd>Telescope git_status<cr>", "Git status" },
     T = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle Blame" },
   },
-  j = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" },
   l = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-    d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
+    d = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Buffer Diagnostics" },
     w = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
     f = { require("lvim.lsp.utils").format, "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
@@ -105,6 +104,7 @@ lvim.builtin.which_key.mappings = {
     },
     e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
   },
+  j = { "<cmd>BufferPick<cr>", "magic buffer-picking mode" },
   h = { "<cmd>nohlsearch<CR>", "No Highlight" },
   S = {
     name = "+sessions",

@@ -52,7 +52,7 @@ function M.fuzzy_grep_string(query)
 end
 
 function M.grep_dotfiles()
-  M.live_grep_v2 {
+  M.dynamic_grep {
     search_dirs = { vim.fn.stdpath "config", os.getenv "ZDOTDIR" },
     hidden = true,
   }
