@@ -1,0 +1,6 @@
+{
+  "Lua.format.enable": false,
+  "Lua.diagnostics.disable": [
+    "redundant-parameter"
+  ]
+}

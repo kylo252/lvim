@@ -1,6 +1,6 @@
 -- general
 lvim.log.level = "info"
-lvim.log.override_notify = true
+lvim.log.override_notify = false
 
 lvim.format_on_save = {
   ---@usage pattern string pattern used for the autocommand (Default: '*')
@@ -27,7 +27,7 @@ lvim.builtin.terminal.direction = "horizontal"
 
 local components = require "lvim.core.lualine.components"
 lvim.builtin.lualine.sections.lualine_y = { "location" }
-lvim.builtin.lualine.sections.lualine_a = { "filename" }
+lvim.builtin.lualine.sections.lualine_a = { { "filename", path = 1 } }
 lvim.builtin.lualine.sections.lualine_b = { components.branch }
 lvim.builtin.lualine.sections.lualine_c = {
   components.diff,
@@ -46,7 +46,7 @@ lvim.lsp.diagnostics.update_in_insert = true
 vim.lsp.set_log_level "warn"
 require("vim.lsp.log").set_format_func(vim.inspect)
 
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd", "pyright" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd", "pyright", "rust_analyzer" })
 
 lvim.lsp.on_attach_callback = function(_, bufnr)
   local function buf_set_option(...)
@@ -98,8 +98,16 @@ for module, _ in pairs(package.loaded) do
   end
 end
 
-lvim.autocommands.custom_groups = {
-  { "DirChanged", "*", "lua require('user.utils').on_dir_changed()" },
+lvim.autocommands = {
+  {
+    "DirChanged",
+    {
+      desc = "add cwd to zoxide",
+      group = "_general_settings",
+      pattern = "*",
+      callback = require("user.utils").on_dir_changed,
+    },
+  },
 }
 
 require "user.keymappings"

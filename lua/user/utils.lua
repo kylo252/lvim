@@ -65,6 +65,12 @@ end
 
 function M.on_dir_changed()
   local entry = vim.loop.cwd()
+  local ignored_patterns = { ".config/l?n?vim", get_lvim_base_dir() }
+  for _, re in ipairs(ignored_patterns) do
+    if entry:match(re) then
+      return
+    end
+  end
   local Job = require "plenary.job"
   local job = Job:new {
     command = "zoxide",
