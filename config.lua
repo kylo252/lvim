@@ -52,6 +52,7 @@ lvim.lsp.on_attach_callback = function(_, bufnr)
   local function buf_set_option(...)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
+
   --Enable completion triggered by <c-x><c-o>
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 end
@@ -138,6 +139,19 @@ table.insert(lvim.plugins, {
   "norcalli/nvim-colorizer.lua",
   config = function()
     require("colorizer").setup({ "css", "scss", "html", "javascript" }, {})
+  end,
+})
+
+table.insert(lvim.plugins, {
+  "sQVe/sort.nvim",
+  "RRethy/nvim-treesitter-textsubjects",
+})
+
+table.insert(lvim.plugins, {
+  "ThePrimeagen/harpoon",
+  requires = { "nvim-telescope/telescope.nvim" },
+  config = function()
+    require("telescope").load_extension "harpoon"
   end,
 })
 ---}}}

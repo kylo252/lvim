@@ -198,6 +198,9 @@ lvim.builtin.which_key.vmappings = {
 }
 
 local select_labels = {
+  ["."] = "@textsubject-smart",
+  [";"] = "@textsubject-container-outer",
+  ["i;"] = "@textsubject-container-inner",
   ["af"] = "@function.outer",
   ["if"] = "@function.inner",
   ["ak"] = "@comment.outer",

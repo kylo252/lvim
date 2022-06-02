@@ -4,6 +4,15 @@ local opts = {
   indent = { enable = true, disable = { "python", "yaml" } },
   autotag = { enable = true },
   rainbow = { enable = false },
+  textsubjects = {
+    enable = true,
+    prev_selection = ",", -- (Optional) keymap to select the previous selection
+    keymaps = {
+      ["."] = "textsubjects-smart",
+      [";"] = "textsubjects-container-outer",
+      ["i;"] = "textsubjects-container-inner",
+    },
+  },
   textobjects = {
     select = {
       enable = true,
@@ -19,6 +28,7 @@ local opts = {
         ["ak"] = "@comment.outer",
         ["aa"] = "@parameter.inner", -- "ap" is already used
         ["ia"] = "@parameter.outer", -- "ip" is already used
+        ["aT"] = "@table.outer",
       },
     },
     lsp_interop = {
