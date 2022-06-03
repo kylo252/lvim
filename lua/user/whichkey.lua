@@ -50,6 +50,7 @@ lvim.builtin.which_key.mappings = {
   },
   g = {
     name = "+git",
+    a = { "<cmd>Telescope git_commits<cr>", "commits" },
     b = { "<cmd>Telescope git_bcommits<cr>", "Buffers commits" },
     Y = {
       r = {

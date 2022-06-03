@@ -21,6 +21,8 @@ lvim.builtin.project.detection_methods = { "lsp", "pattern" }
 lvim.builtin.project.ignore_lsp = { "null-ls" }
 lvim.builtin.project.silent_chdir = true
 
+lvim.builtin.autopairs.disable_filetype = { "TelescopePrompt", "ps1", "sh" }
+
 lvim.builtin.terminal.active = true
 lvim.builtin.terminal.open_mapping = "<C-\\>"
 lvim.builtin.terminal.direction = "horizontal"
