@@ -1,3 +1,4 @@
+local M = {}
 lvim.keys = {
   ---@usage change or add keymappings for insert mode
   insert_mode = {
@@ -49,7 +50,7 @@ lvim.keys = {
     ["]d"] = "<PageDown>",
 
     -- fix gx
-    ["gx"] = "<cmd>lua require('user.sanegx').open()<cr>",
+    ["gx"] = "<cmd>lua require('user.utils').xdg_open_handler()<cr>",
 
     -- quick rename
     ["<F2>"] = ":%s@<c-r><c-w>@<c-r><c-w>@gc<c-f>$F@i",
@@ -69,7 +70,7 @@ lvim.keys = {
   ---@usage change or add keymappings for visual mode
   visual_mode = {
     -- Allow pasting same thing many times
-    ["p"] = '""p:let @"=@0<CR>',
+    ["P"] = '"_dP',
 
     -- better indent
     [">"] = "<gv",
@@ -88,7 +89,7 @@ lvim.keys = {
     ["<S-Up"] = "k",
 
     -- fix gx
-    ["gx"] = "<cmd>lua require('utils').xdg_open_handler()<cr>",
+    ["gx"] = "<cmd>lua require('user.utils').xdg_open_handler()<cr>",
 
     -- search for visually selected text
     ["//"] = [[y/\V<C-R>=escape(@",'/\')<CR><CR>]],
@@ -106,6 +107,9 @@ lvim.keys = {
     -- Move current line / block with Alt-j/k ala vscode.
     ["<A-j>"] = ":m '>+1<CR>gv-gv",
     ["<A-k>"] = ":m '<-2<CR>gv-gv",
+
+    -- Sort lines
+    ["<A-s>"] = "<esc>:'<,'>!sort -u<CR>",
   },
   ---@usage change or add keymappings for command mode
   command_mode = {
@@ -115,3 +119,7 @@ lvim.keys = {
     ["<C-k>"] = { 'pumvisible() ? "\\<C-p>" : "\\<C-k>"', { expr = true, noremap = true } },
   },
 }
+
+require "user.whichkey"
+
+return M

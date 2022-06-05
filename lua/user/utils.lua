@@ -1,21 +1,4 @@
 local M = {}
-vim.cmd [[
-function! Dump(cmd)
-  redir => message
-  silent execute a:cmd
-  redir END
-  if empty(message)
-    echoerr "no output"
-  else
-    " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
-    new
-    nnoremap <silent> <buffer> q :close<CR>
-    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
-    silent put=message
-  endif
-endfunction
-command! -nargs=+ -complete=command Dump call Dump(<q-args>)
-]]
 
 function M.copy_help_url()
   if vim.bo.filetype ~= "help" then
@@ -36,7 +19,8 @@ function M.copy_help_url()
     return ""
   end
 
-  local help_url = string.format("https://neovim.io/doc/user/%s.html#%s", vim.fn.expand "%:t:r", last_search_query())
+  local base_url = "https://neovim.io/doc/user/%s.html#%s"
+  local help_url = string.format(base_url, vim.fn.expand "%:t:r", last_search_query())
   vim.notify(help_url, vim.log.levels.INFO, { title = "help url" })
   vim.fn.setreg("+", help_url)
 end
@@ -61,6 +45,16 @@ function M.get_blame_url()
     end)
   end)
   job:start()
+end
+
+function M.xdg_open_handler()
+  if vim.fn.executable "xdg-open" ~= 1 then
+    vim.notify("xdg-open was not found", vim.log.levels.WARN)
+    return
+  end
+  local uri = vim.fn.shellescape(vim.fn.expand "<cWORD>")
+  vim.notify("trying to open: " .. uri, vim.log.levels.DEBUG)
+  os.execute("xdg-open " .. uri)
 end
 
 function M.on_dir_changed()

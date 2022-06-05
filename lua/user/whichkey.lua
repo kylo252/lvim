@@ -130,6 +130,12 @@ lvim.builtin.which_key.mappings = {
     S = { "<cmd>PackerStatus<cr>", "Status" },
     u = { "<cmd>PackerUpdate<cr>", "Update" },
   },
+  z = {
+    name = "+zettel",
+    j = { "<cmd>ZkNotes<cr>", "notes" },
+    n = { "<cmd>ZkNew<cr>", "new" },
+    t = { "<cmd>ZkNewFromContentSelection<cr>", "new from selection" },
+  },
 
   L = {
     name = "+LunarVim",

@@ -40,18 +40,37 @@ local base_collection = {
       complete = require("user.sessions").get_sessions,
     },
   },
+  {
+    name = "ConfigReload",
+    fn = function()
+      -- hot-reload user plugins
+      for module, _ in pairs(package.loaded) do
+        if module:match "user" then
+          _G.require_clean(module)
+        end
+      end
+    end,
+  },
 }
 
-function M.load_commands(collection)
-  local common_opts = { force = true }
-  for _, cmd in pairs(collection) do
-    local opts = vim.tbl_deep_extend("force", common_opts, cmd.opts or {})
-    vim.api.nvim_create_user_command(cmd.name, cmd.fn, opts)
-  end
-end
+vim.list_extend(require("lvim.core.commands").defaults, base_collection)
 
-function M.setup()
-  M.load_commands(base_collection)
-end
+vim.cmd [[
+function! Dump(cmd)
+  redir => message
+  silent execute a:cmd
+  redir END
+  if empty(message)
+    echoerr "no output"
+  else
+    " use "new" instead of "tabnew" below if you prefer split windows instead of tabs
+    new
+    nnoremap <silent> <buffer> q :close<CR>
+    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
+    silent put=message
+  endif
+endfunction
+command! -nargs=+ -complete=command Dump call Dump(<q-args>)
+]]
 
 return M
