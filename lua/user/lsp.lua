@@ -36,12 +36,26 @@ local code_actions = require "lvim.lsp.null-ls.code_actions"
 formatters.setup {
   { command = "shfmt", extra_args = { "-i", "2", "-ci", "-bn" } },
   { command = "stylua" },
-  { command = "markdownlint", filetypes = { "markdown" } },
+  {
+    command = "markdownlint",
+    filetypes = { "markdown" },
+    cwd = function(params)
+      local u = require "null-ls.utils"
+      return u.root_pattern ".markdownlintrc"(params.bufname)
+    end,
+  },
 }
 
 linters.setup {
   { command = "shellcheck" },
-  { command = "markdownlint", filetypes = { "markdown" } },
+  {
+    command = "markdownlint",
+    filetypes = { "markdown" },
+    cwd = function(params)
+      local u = require "null-ls.utils"
+      return u.root_pattern ".markdownlintrc"(params.bufname)
+    end,
+  },
   {
     command = "cspell",
     filetypes = { "markdown" },

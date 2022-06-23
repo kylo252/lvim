@@ -1,4 +1,5 @@
 vim.cmd [[
-  setl list
-  setl listchars=trail:*
+  setl list listchars=trail:*
+  setl textwidth=80 formatoptions+=aw
+  setl foldmethod=indent
 ]]

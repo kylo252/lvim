@@ -46,12 +46,12 @@ vim.opt.shortmess:append "c" -- don't show the dumb matching stuff
 if vim.fn.has "wsl" == 1 then
   vim.g.clipboard = {
     copy = {
-      ["+"] = "win32yank.exe -i --crlf",
-      ["*"] = "win32yank.exe -i --crlf",
+      ["+"] = "win32yank -i --crlf",
+      ["*"] = "win32yank -i --crlf",
     },
     paste = {
-      ["+"] = "win32yank.exe -o --lf",
-      ["*"] = "win32yank.exe -o --lf",
+      ["+"] = "win32yank -o --lf",
+      ["*"] = "win32yank -o --lf",
     },
   }
 end

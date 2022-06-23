@@ -41,15 +41,16 @@ lvim.builtin.lualine.sections.lualine_c = {
 ---}}}
 
 ---{{{ plugins
-lvim.plugins = require "user.plugins"
+lvim.plugins = require_clean "user.plugins"
 
-require "user.commands"
-require "user.dashboard"
-require "user.keymappings"
-require "user.lsp"
-require "user.settings"
-require "user.telescope"
-require "user.treesitter"
+require_clean "user.commands"
+require_clean "user.dashboard"
+require_clean "user.keymappings"
+require_clean "user.lsp"
+require_clean "user.settings"
+require_clean "user.telescope"
+require_clean "user.treesitter"
+require_clean "user.utils"
 ---}}}
 
 ---{{{ scratch
@@ -77,6 +78,13 @@ table.insert(lvim.plugins, {
   requires = { "nvim-telescope/telescope.nvim" },
   config = function()
     require("telescope").load_extension "harpoon"
+  end,
+})
+
+table.insert(lvim.plugins, {
+  "anuvyklack/pretty-fold.nvim",
+  config = function()
+    require("pretty-fold").setup()
   end,
 })
 ---}}}
