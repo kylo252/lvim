@@ -47,7 +47,6 @@ formatters.setup {
 }
 
 linters.setup {
-  { command = "shellcheck" },
   {
     command = "markdownlint",
     filetypes = { "markdown" },
