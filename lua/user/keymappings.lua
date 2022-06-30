@@ -88,9 +88,6 @@ lvim.keys = {
     ["<S-Down>"] = "j",
     ["<S-Up"] = "k",
 
-    -- fix gx
-    ["gx"] = "<cmd>lua require('user.utils').xdg_open_handler()<cr>",
-
     -- search for visually selected text
     ["//"] = [[y/\V<C-R>=escape(@",'/\')<CR><CR>]],
   },

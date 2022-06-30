@@ -47,14 +47,26 @@ function M.get_blame_url()
   job:start()
 end
 
+function M.open_uri(uri)
+  vim.notify("opening: " .. uri, vim.log.levels.INFO)
+  local task = {
+    command = "xdg-open",
+    args = { uri },
+  }
+  local Job = require "plenary.job"
+  Job:new(task):start()
+end
+
 function M.xdg_open_handler()
   if vim.fn.executable "xdg-open" ~= 1 then
     vim.notify("xdg-open was not found", vim.log.levels.WARN)
     return
   end
-  local uri = vim.fn.shellescape(vim.fn.expand "<cWORD>")
-  vim.notify("trying to open: " .. uri, vim.log.levels.DEBUG)
-  os.execute("xdg-open " .. uri)
+
+  local ts_utils = require "nvim-treesitter.ts_utils"
+  local n = ts_utils.get_node_at_cursor()
+  local uri = vim.treesitter.query.get_node_text(n, 0)
+  M.open_uri(uri)
 end
 
 function M.on_dir_changed()
