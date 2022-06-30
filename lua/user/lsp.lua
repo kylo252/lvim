@@ -31,7 +31,10 @@ lvim.lsp.null_ls.setup = {
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 local linters = require "lvim.lsp.null-ls.linters"
-local code_actions = require "lvim.lsp.null-ls.code_actions"
+
+local path = require("null-ls.utils").path
+local root_pattern = require("null-ls.utils").root_pattern
+local nls_cache = require("null-ls.helpers").cache
 
 formatters.setup {
   { command = "shfmt", extra_args = { "-i", "2", "-ci", "-bn" } },
@@ -39,9 +42,11 @@ formatters.setup {
   {
     command = "markdownlint",
     filetypes = { "markdown" },
-    cwd = function(params)
-      local u = require "null-ls.utils"
-      return u.root_pattern ".markdownlintrc"(params.bufname)
+    cwd = nls_cache.by_bufnr(function(params)
+      return root_pattern ".markdownlintrc"(params.bufname)
+    end),
+    condition = function(utils)
+      return utils.root_has_file ".markdownlintrc"
     end,
   },
 }
@@ -50,27 +55,32 @@ linters.setup {
   {
     command = "markdownlint",
     filetypes = { "markdown" },
-    cwd = function(params)
-      local u = require "null-ls.utils"
-      return u.root_pattern ".markdownlintrc"(params.bufname)
+    cwd = nls_cache.by_bufnr(function(params)
+      return root_pattern ".markdownlintrc"(params.bufname)
+    end),
+    condition = function(utils)
+      return utils.root_has_file ".markdownlintrc"
     end,
   },
   {
     command = "cspell",
     filetypes = { "markdown" },
+    cwd = nls_cache.by_bufnr(function(params)
+      return root_pattern ".cspell.json"(params.bufname)
+    end),
     condition = function(utils)
-      return utils.root_has_file { ".cspell.json" }
+      return utils.root_has_file ".cspell.json"
     end,
   },
   {
     command = "luacheck",
-    cwd = function(params) -- force luacheck to find its config file
-      local u = require "null-ls.utils"
-      return u.root_pattern ".luacheckrc"(params.bufname)
-    end,
+    cwd = nls_cache.by_bufnr(function(params)
+      return root_pattern ".luacheckrc"(params.bufname)
+    end),
+    runtime_condition = nls_cache.by_bufnr(function(params)
+      return path.exists(path.join(params.root, ".luacheckrc"))
+    end),
   },
 }
-
-code_actions.setup { { name = "shellcheck" } }
 
 return M
