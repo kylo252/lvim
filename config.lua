@@ -29,8 +29,8 @@ lvim.builtin.terminal.direction = "horizontal"
 
 local components = require "lvim.core.lualine.components"
 lvim.builtin.lualine.sections.lualine_y = { "location" }
-lvim.builtin.lualine.sections.lualine_a = { { "filename", path = 1 } }
-lvim.builtin.lualine.sections.lualine_b = { components.branch }
+lvim.builtin.lualine.sections.lualine_a = { components.branch }
+lvim.builtin.lualine.sections.lualine_b = { { "filename", path = 1 } }
 lvim.builtin.lualine.sections.lualine_c = {
   components.diff,
   {

@@ -1,10 +1,9 @@
 return {
 
   -- LSP and linting
-  { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufRead" },
+  { "nvim-treesitter/nvim-treesitter-textobjects" },
   {
     "nvim-treesitter/playground",
-    cmd = "TSPlaygroundToggle",
     config = function()
       lvim.builtin.treesitter.playground.enable = true
     end,

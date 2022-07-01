@@ -195,7 +195,10 @@ lvim.builtin.which_key.mappings = {
   },
   T = {
     name = "Treesitter",
-    i = { ":TSConfigInfo<cr>", "Info" },
+    f = { ":TSNodeUnderCursor<cr>", "Node under cursor" },
+    c = { ":TSCaptureUnderCursor<cr>", "Capture under Cursor" },
+    i = { ":TSConfigInfo<cr>", "Config info" },
+    t = { ":TSPlaygroundToggle<cr>", "Playground" },
   },
 }
 
