@@ -38,7 +38,7 @@ return {
   -- TMUX and session management
   {
     "aserowy/tmux.nvim",
-    event = "BufReadPost",
+    event = "UIEnter",
     config = function()
       require("user.tmux").setup()
     end,
