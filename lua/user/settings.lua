@@ -58,5 +58,14 @@ end
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
-vim.g.do_filetype_lua = 1
-vim.g.did_load_filetypes = 0
+if vim.loop.os_uname().version:match "Windows" then
+  vim.opt.shell = "pwsh.exe -NoLogo"
+  vim.opt.shellcmdflag =
+    "-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+  vim.opt.shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+  vim.opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+  vim.opt.shellquote = ""
+  vim.opt.shellxquote = ""
+
+  lvim.builtin.terminal.shell = "pwsh.exe -NoLogo"
+end

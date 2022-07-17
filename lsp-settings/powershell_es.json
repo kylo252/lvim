@@ -1,3 +1,12 @@
 {
-  "powershell.codeFormatting.preset": "OTBS"
+  "powershell.codeFolding.enable": true,
+
+  "powershell.codeFormatting.preset": "OTBS",
+  "powershell.codeFormatting.useCorrectCasing": true,
+
+  "powershell.codeFormatting.ignoreOneLineBlock": true,
+  "powershell.promptToUpdatePowerShell": false,
+
+  "powershell.scriptAnalysis.enable": true
 }
+

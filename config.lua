@@ -87,4 +87,21 @@ table.insert(lvim.plugins, {
     require("pretty-fold").setup()
   end,
 })
+
+lvim.colorscheme = "nightfox"
+table.insert(lvim.plugins, {
+  "EdenEast/nightfox.nvim",
+  config = function()
+    require("nightfox").setup {
+      options = {
+        styles = {
+          comments = "italic",
+          keywords = "bold",
+          types = "italic,bold",
+        },
+      },
+    }
+  end,
+})
+
 ---}}}

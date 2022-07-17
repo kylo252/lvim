@@ -140,7 +140,7 @@ lvim.builtin.which_key.mappings = {
   L = {
     name = "+LunarVim",
     c = {
-      "<cmd>edit ~/.config/lvim/config.lua<cr>",
+      "<cmd>edit $LUNARVIM_CONFIG_DIR/config.lua<cr>",
       "Edit config.lua",
     },
     C = {
