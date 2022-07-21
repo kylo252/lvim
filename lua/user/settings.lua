@@ -42,19 +42,18 @@ vim.opt.iskeyword:append "-" -- used in searching and recognizing with many comm
 vim.opt.whichwrap:append "<,>,[,],h,l" -- let movement keys reach the previous line
 vim.opt.shortmess:append "c" -- don't show the dumb matching stuff
 
-if vim.fn.has "wsl" == 1 then
-  vim.g.clipboard = {
-    copy = {
-      ["+"] = "win32yank -i --crlf",
-      ["*"] = "win32yank -i --crlf",
-    },
-    paste = {
-      ["+"] = "win32yank -o --lf",
-      ["*"] = "win32yank -o --lf",
-    },
-  }
-end
-
+vim.g.clipboard = {
+  name = "tmuxHandler",
+  copy = {
+    ["+"] = "tmux load-buffer -",
+    ["*"] = "tmux load-buffer -",
+  },
+  paste = {
+    ["+"] = "tmux save-buffer -",
+    ["*"] = "tmux save-buffer -",
+  },
+  cache_enabled = true,
+}
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 

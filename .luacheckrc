@@ -26,6 +26,7 @@ stds.nvim = {
     "get_cache_dir",
     "get_lvim_base_dir",
     "require_clean",
+    "require_safe",
     "dump"
   },
 }

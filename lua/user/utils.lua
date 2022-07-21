@@ -105,4 +105,15 @@ function _G.require_clean(m)
   return module
 end
 
+function _G.require_safe(m)
+  local status_ok, module = pcall(require, m)
+  if not status_ok then
+    local trace = debug.getinfo(2, "SL")
+    local shorter_src = trace.short_src:gsub(vim.fn.stdpath "config", ".")
+    local lineinfo = shorter_src .. ":" .. (trace.currentline or trace.linedefined)
+    local msg = string.format("%s : skipped loading [%s]", lineinfo, m)
+    vim.notify_once(msg, vim.log.levels.TRACE)
+  end
+  return module
+end
 return M

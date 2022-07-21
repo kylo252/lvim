@@ -1,14 +1,26 @@
-
 local M = {}
-function M.get_blame_url()
-  local repo_url = require("gitlinker").get_repo_url { print_url = false }
+
+function M.get_github_blame_url(opts)
+  local gitlinker = require "gitlinker"
+  local user_opts = vim.tbl_deep_extend("force", {
+    print_url = false,
+    remote = "origin",
+  }, opts or {})
+  local repo_url = gitlinker.get_repo_url(user_opts)
 
   local win_id = vim.api.nvim_get_current_win()
+  local bufnr = vim.api.nvim_get_current_buf()
   local cur_pos = vim.api.nvim_win_get_cursor(win_id)
-  local filename = vim.fn.expand "%"
-  local repo = require("lspconfig.util").find_git_ancestor(vim.fn.expand "%:p")
-  local lnum = cur_pos[1] + 1
-  local args = { "log", "-L" .. lnum .. "," .. lnum + 1 .. ":" .. filename, "--pretty=%H", "--no-patch" }
+  ---@diagnostic disable-next-line: missing-parameter
+  local filename = vim.api.nvim_buf_get_name(bufnr)
+  local repo = vim.loop.cwd()
+  local lnum = cur_pos[1]
+  local args = {
+    "log",
+    "-L" .. lnum .. "," .. lnum + 1 .. ":" .. filename,
+    "--pretty=%H",
+    "--no-patch",
+  }
   local job = require("plenary.job"):new { command = "git", args = args, cwd = repo }
   local commit_url
   job:after_success(function(this_job)

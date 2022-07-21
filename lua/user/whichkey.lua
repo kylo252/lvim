@@ -28,7 +28,13 @@ lvim.builtin.which_key.mappings = {
     l = { "<cmd>DynamicGrep<CR>", "DynamicGrep" },
     m = { "<cmd>Telescope marks<CR>", "Marks" },
     p = { "<cmd>lua require('user.telescope.custom-finders').find_files_local()<CR>", "Find files (local)" },
-    r = { "<cmd>Telescope oldfiles cwd_only=true<CR>", "Find recent files (local)" },
+    r = { "<cmd>Telescope oldfiles<CR>", "Find recent files" },
+    t = {
+      function()
+        require("user.telescope.custom-finders").dynamic_grep { args = "ft=" .. vim.bo.filetype }
+      end,
+      "live grep (same filetype)",
+    },
     i = {
       name = "+internal",
       c = { "<cmd>Telescope commands<CR>", "commands" },
@@ -46,21 +52,37 @@ lvim.builtin.which_key.mappings = {
     L = { "<cmd>lua require('user.telescope.custom-finders').local_buffer_fuzzy_grep()<CR>", "Local fuzzy grep" },
     M = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
     P = { "<cmd>Telescope projects<CR>", "Find recent projects" },
-    R = { "<cmd>Telescope oldfiles<CR>", "Find recent files" },
+    R = { "<cmd>Telescope oldfiles cwd_only=true<CR>", "Find recent files (local)" },
   },
   g = {
     name = "+git",
     a = { "<cmd>Telescope git_commits<cr>", "commits" },
     b = { "<cmd>Telescope git_bcommits<cr>", "Buffers commits" },
     Y = {
-      r = {
-        '<cmd>lua require"gitlinker".get_repo_url()<cr>',
-        "Copy repo URL",
-      },
       b = {
-        require("user.git").get_blame_url,
+        function()
+          require("user.git").get_github_blame_url { remote = "origin" }
+        end,
         "Copy blame URL",
       },
+      r = {
+        function()
+          require("gitlinker").get_repo_url { remote = "origin" }
+        end,
+        "Copy repo URL",
+      },
+      y = {
+        function()
+          require_safe("gitlinker").get_buf_range_url("n", { remote = "origin" })
+        end,
+        "Copy line URL (origin)",
+      },
+    },
+    y = {
+      function()
+        require_safe("gitlinker").get_buf_range_url "n"
+      end,
+      "Copy line URL",
     },
     j = { "<cmd>Gitsigns next_hunk<cr>", "Next Hunk" },
     k = { "<cmd>Gitsigns prev_hunk<cr>", "Prev Hunk" },
@@ -205,6 +227,18 @@ lvim.builtin.which_key.mappings = {
 lvim.builtin.which_key.vmappings = {
   ["/"] = { "<ESC><CMD>lua require('Comment.api').gc(vim.fn.visualmode())<CR>", "Comment" },
   ["lf"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "Format" },
+  ["<leader>gy"] = {
+    function()
+      require_safe("gitlinker").get_buf_range_url "v"
+    end,
+    "Copy range URL",
+  },
+  ["<leader>gY"] = {
+    function()
+      require_safe("gitlinker").get_buf_range_url("v", { remote = "origin" })
+    end,
+    "Copy range URL (origin)",
+  },
 }
 
 local select_labels = {
