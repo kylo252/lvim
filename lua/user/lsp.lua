@@ -17,6 +17,9 @@ lvim.lsp.on_attach_callback = function(_, bufnr)
   end
   --Enable completion triggered by <c-x><c-o>
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+
+  -- use gq for formatting
+  buf_set_option("formatexpr", "v:lua.vim.lsp.formatexpr(#{timeout_ms:250})")
 end
 
 require("nvim-lsp-installer").settings {

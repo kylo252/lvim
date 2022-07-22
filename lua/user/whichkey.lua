@@ -226,7 +226,6 @@ lvim.builtin.which_key.mappings = {
 
 lvim.builtin.which_key.vmappings = {
   ["/"] = { "<ESC><CMD>lua require('Comment.api').gc(vim.fn.visualmode())<CR>", "Comment" },
-  ["lf"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "Format" },
   ["<leader>gy"] = {
     function()
       require_safe("gitlinker").get_buf_range_url "v"
