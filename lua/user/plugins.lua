@@ -92,6 +92,25 @@ return {
     end,
   },
   {
+    "simrat39/rust-tools.nvim",
+    config = function()
+      require("rust-tools").setup {
+        tools = {
+          autoSetHints = true,
+          hover_with_actions = true,
+          runnables = {
+            use_telescope = true,
+          },
+        },
+        server = {
+          on_attach = require("lvim.lsp").common_on_attach,
+          on_init = require("lvim.lsp").common_on_init,
+        },
+      }
+    end,
+    ft = { "rust", "rs" },
+  },
+  {
     "danymat/neogen",
     config = function()
       require("neogen").setup {

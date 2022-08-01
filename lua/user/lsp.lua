@@ -11,17 +11,6 @@ require("vim.lsp.log").set_format_func(vim.inspect)
 
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd", "rust_analyzer" })
 
-lvim.lsp.on_attach_callback = function(_, bufnr)
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
-  -- use gq for formatting
-  buf_set_option("formatexpr", "v:lua.vim.lsp.formatexpr(#{timeout_ms:250})")
-end
-
 require("nvim-lsp-installer").settings {
   log_level = vim.log.levels.WARN,
 }
