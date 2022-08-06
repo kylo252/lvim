@@ -67,6 +67,7 @@ return {
     end,
   },
   -- MISC
+  { "gpanders/editorconfig.nvim" },
   {
     "michaelb/sniprun",
     run = "bash ./install.sh",
