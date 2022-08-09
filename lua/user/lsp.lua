@@ -9,10 +9,7 @@ vim.lsp.set_log_level "warn"
 
 require("vim.lsp.log").set_format_func(vim.inspect)
 
-vim.list_extend(
-  lvim.lsp.automatic_configuration.skipped_servers,
-  { "clangd", "rust_analyzer", "tsserver", "cssls", "html" }
-)
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd", "rust_analyzer" })
 
 lvim.lsp.installer.setup.automatic_installation = {
   exclude = { "clangd" },
