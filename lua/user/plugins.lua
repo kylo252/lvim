@@ -99,19 +99,39 @@ return {
     end,
   },
   {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-neotest/neotest-plenary",
+    },
+    config = function()
+      require("neotest").setup {
+        adapters = {
+          require "neotest-plenary",
+        },
+        default_strategy = "dap",
+      }
+    end,
+  },
+  {
     "simrat39/rust-tools.nvim",
     config = function()
       require("rust-tools").setup {
         tools = {
           autoSetHints = true,
-          hover_with_actions = true,
           runnables = {
             use_telescope = true,
           },
         },
         server = {
-          on_attach = require("lvim.lsp").common_on_attach,
           on_init = require("lvim.lsp").common_on_init,
+          on_attach = function(client, bufnr)
+            require("lvim.lsp").common_on_attach(client, bufnr)
+            local rt = require "rust-tools"
+            -- Hover actions
+            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+            -- Code action groups
+            vim.keymap.set("n", "<leader>lA", rt.code_action_group.code_action_group, { buffer = bufnr })
+          end,
         },
       }
     end,
