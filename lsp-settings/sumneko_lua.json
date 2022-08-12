@@ -1,6 +1,7 @@
 {
   "Lua.format.enable": false,
   "Lua.diagnostics.disable": [
-    "redundant-parameter"
+    "redundant-parameter",
+    "param-type-mismatch"
   ]
 }

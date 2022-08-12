@@ -31,29 +31,9 @@ local nls_cache = require("null-ls.helpers").cache
 formatters.setup {
   { command = "shfmt", extra_args = { "-i", "2", "-ci", "-bn" } },
   { command = "stylua" },
-  {
-    command = "markdownlint",
-    filetypes = { "markdown" },
-    cwd = nls_cache.by_bufnr(function(params)
-      return root_pattern ".markdownlintrc"(params.bufname)
-    end),
-    condition = function(utils)
-      return utils.root_has_file ".markdownlintrc"
-    end,
-  },
 }
 
 linters.setup {
-  {
-    command = "markdownlint",
-    filetypes = { "markdown" },
-    cwd = nls_cache.by_bufnr(function(params)
-      return root_pattern ".markdownlintrc"(params.bufname)
-    end),
-    condition = function(utils)
-      return utils.root_has_file ".markdownlintrc"
-    end,
-  },
   {
     command = "cspell",
     filetypes = { "markdown" },

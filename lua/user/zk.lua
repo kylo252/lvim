@@ -10,7 +10,6 @@ function M.config()
         name = "zk",
         on_attach = function()
           require("lvim.lsp").common_on_attach()
-          vim.cmd [[ setl foldmethod=indent foldlevel=0 ]]
         end,
       },
       -- automatically attach buffers in a zk notebook that match the given filetypes

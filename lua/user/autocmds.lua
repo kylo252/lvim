@@ -15,6 +15,14 @@ lvim.autocommands = {
       callback = require("user.utils").on_dir_changed,
     },
   },
+  {
+    "FileType",
+    {
+      group = "_filetype_settings",
+      pattern = { "gitcommit", "markdown" },
+      command = "setl fdm=indent fdl=2 spell spc= list lcs=trail:* tw=100",
+    },
+  },
 }
 
 return M
