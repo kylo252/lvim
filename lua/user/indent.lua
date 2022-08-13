@@ -10,6 +10,7 @@ function M.setup()
       "dashboard",
       "lspinfo",
       "lsp-installer",
+      "mason",
     },
     buftype_exclude = { "terminal" },
     bufname_exclude = { "config.lua" },
