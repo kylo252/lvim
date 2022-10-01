@@ -51,13 +51,6 @@ return {
       require("neoscroll").setup { respect_scrolloff = true }
     end,
   },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPost",
-    config = function()
-      require("user.indent").setup()
-    end,
-  },
   -- GIT
   {
     "ruifm/gitlinker.nvim",

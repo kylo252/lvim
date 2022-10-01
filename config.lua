@@ -1,7 +1,6 @@
 -- general
 lvim.log.level = "info"
 lvim.log.override_notify = false
-
 lvim.format_on_save = {
   ---@usage pattern string pattern used for the autocommand (Default: '*')
   pattern = "*.lua",
@@ -11,6 +10,7 @@ lvim.format_on_save = {
 
 ---{{{ builtins
 lvim.builtin.notify.active = true
+lvim.colorscheme = "tokyonight-night"
 
 lvim.builtin.comment.mappings["extra"] = true
 lvim.builtin.comment.mappings["extended"] = true
@@ -26,6 +26,9 @@ lvim.builtin.autopairs.disable_filetype = { "TelescopePrompt", "ps1", "sh" }
 lvim.builtin.terminal.active = true
 lvim.builtin.terminal.open_mapping = "<C-\\>"
 lvim.builtin.terminal.direction = "horizontal"
+
+lvim.builtin.indentlines.options.show_first_indent_level = false
+lvim.builtin.indentlines.options.use_treesitter = false
 
 local components = require "lvim.core.lualine.components"
 lvim.builtin.lualine.sections.lualine_y = { "location" }
@@ -87,46 +90,5 @@ table.insert(lvim.plugins, {
     require("pretty-fold").setup()
   end,
 })
-table.insert(lvim.plugins, {
-  "EdenEast/nightfox.nvim",
-  config = function()
-    -- Default options
-    require("nightfox").setup {
-      options = {
-        -- Compiled file's destination location
-        compile_path = vim.fn.stdpath "cache" .. "/nightfox",
-        compile_file_suffix = "_compiled", -- Compiled file suffix
-        transparent = false, -- Disable setting background
-        terminal_colors = true, -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
-        dim_inactive = false, -- Non focused panes set to alternative background
-        styles = { -- Style to be applied to different syntax groups
-          comments = "NONE", -- Value is any valid attr-list value `:help attr-list`
-          conditionals = "NONE",
-          constants = "NONE",
-          functions = "NONE",
-          keywords = "NONE",
-          numbers = "NONE",
-          operators = "NONE",
-          strings = "NONE",
-          types = "NONE",
-          variables = "NONE",
-        },
-        inverse = { -- Inverse highlight for different types
-          match_paren = false,
-          visual = false,
-          search = false,
-        },
-        modules = { -- List of various plugins and additional options
-          -- ...
-        },
-      },
-      palettes = {},
-      specs = {},
-      groups = {},
-    }
 
-    -- setup must be called before loading
-    vim.cmd "colorscheme nightfox"
-  end,
-})
 ---}}}

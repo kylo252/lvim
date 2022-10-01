@@ -1,4 +1,5 @@
 lvim.builtin.which_key.mappings = {
+  ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
   ["<Space>"] = { ":BufferNext<CR>", "Go to the next buffer" },
   b = {
     name = "+buffers",
@@ -43,7 +44,7 @@ lvim.builtin.which_key.mappings = {
       k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
       r = { "<cmd>Telescope registers<CR>", "Registers" },
       C = {
-        "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
+        "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>",
         "Colorscheme with Preview",
       },
       M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
@@ -58,6 +59,7 @@ lvim.builtin.which_key.mappings = {
     name = "+git",
     a = { "<cmd>Telescope git_commits<cr>", "commits" },
     b = { "<cmd>Telescope git_bcommits<cr>", "Buffers commits" },
+    g = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", "Lazygit" },
     Y = {
       b = {
         function()
@@ -225,7 +227,9 @@ lvim.builtin.which_key.mappings = {
 }
 
 lvim.builtin.which_key.vmappings = {
-  ["/"] = { "<ESC><CMD>lua require('Comment.api').gc(vim.fn.visualmode())<CR>", "Comment" },
+  ["kc"] = { "<ESC><CMD>lua require('Comment.api').gc(vim.fn.visualmode())<CR>", "Comment" },
+  ["kb"] = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
+  ["/"] = { "<Plug>(comment_toggle_linewise_visual)", "Comment" },
   ["<leader>gy"] = {
     function()
       require_safe("gitlinker").get_buf_range_url "v"
