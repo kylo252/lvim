@@ -3,6 +3,10 @@ local M = {}
 local _, actions = pcall(require, "telescope.actions")
 local _, themes = pcall(require, "telescope.themes")
 
+lvim.builtin.telescope.defaults.path_display = nil
+lvim.builtin.telescope.defaults.pickers = nil
+lvim.builtin.telescope.pickers = nil
+
 lvim.builtin.telescope.defaults.mappings = {
   i = {
     ["<C-c>"] = actions.close,

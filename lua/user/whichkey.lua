@@ -59,7 +59,8 @@ lvim.builtin.which_key.mappings = {
     name = "+git",
     a = { "<cmd>Telescope git_commits<cr>", "commits" },
     b = { "<cmd>Telescope git_bcommits<cr>", "Buffers commits" },
-    g = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", "Lazygit" },
+    d = { "<cmd>! fman-tmux -c 'git dots-lazy'<cr>", "Lazydots" },
+    g = { "<cmd>! fman-tmux -c lazygit<cr>", "Lazygit" },
     Y = {
       b = {
         function()
