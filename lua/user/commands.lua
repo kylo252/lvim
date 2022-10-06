@@ -57,7 +57,7 @@ local base_collection = {
   },
 }
 
-vim.list_extend(require("lvim.core.commands").defaults, base_collection)
+require("lvim.core.commands").load(base_collection)
 
 vim.cmd [[
 function! Dump(cmd)

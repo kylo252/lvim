@@ -46,14 +46,14 @@ lvim.builtin.lualine.sections.lualine_c = {
 ---{{{ plugins
 lvim.plugins = require_clean "user.plugins"
 
-require_clean "user.commands"
-require_clean "user.dashboard"
-require_clean "user.keymappings"
-require_clean "user.lsp"
-require_clean "user.settings"
-require_clean "user.telescope"
-require_clean "user.treesitter"
-require_clean "user.utils"
+reload "user.commands"
+reload "user.dashboard"
+reload "user.keymappings"
+reload "user.lsp"
+reload "user.settings"
+reload "user.telescope"
+reload "user.treesitter"
+reload "user.utils"
 ---}}}
 
 ---{{{ scratch
@@ -88,6 +88,14 @@ table.insert(lvim.plugins, {
   "anuvyklack/pretty-fold.nvim",
   config = function()
     require("pretty-fold").setup()
+  end,
+})
+
+table.insert(lvim.plugins, {
+  "EdenEast/nightfox.nvim",
+  config = function()
+    -- Default options
+    require("nightfox").setup {}
   end,
 })
 
