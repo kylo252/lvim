@@ -46,6 +46,7 @@ lvim.builtin.lualine.sections.lualine_c = {
 ---{{{ plugins
 lvim.plugins = require_clean "user.plugins"
 
+reload "user.autocmds"
 reload "user.commands"
 reload "user.dashboard"
 reload "user.keymappings"
