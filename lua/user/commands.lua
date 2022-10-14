@@ -26,34 +26,41 @@ local base_collection = {
   },
   {
     name = "SessionLoad",
-    fn = function(nargs)
-      require("user.sessions").load_session(nargs.args)
+    fn = function(opts)
+      require("user.sessions").load_session(opts.args)
     end,
     opts = {
-      nargs = "?",
+      nargs = 1,
       complete = require("user.sessions").get_sessions,
     },
   },
   {
     name = "SessionSave",
-    fn = function(nargs)
-      require("user.sessions").save_session(nargs.args)
+    fn = function(opts)
+      require("user.sessions").save_session(opts.args)
     end,
     opts = {
-      nargs = "?",
+      nargs = 1,
       complete = require("user.sessions").get_sessions,
     },
   },
   {
-    name = "ConfigReload",
-    fn = function()
-      -- hot-reload user plugins
-      for module, _ in pairs(package.loaded) do
-        if module:match "user" then
-          _G.require_clean(module)
-        end
-      end
+    name = "NullLsToggle",
+    fn = function(opts)
+      require("null-ls.sources").toggle(opts.args)
     end,
+    opts = {
+      nargs = 1,
+      complete = function()
+        local s = require "null-ls.sources"
+        local available_sources = s.get_available()
+        local list = {}
+        for _, source in ipairs(available_sources) do
+          list[#list + 1] = source.name
+        end
+        return list
+      end,
+    },
   },
 }
 

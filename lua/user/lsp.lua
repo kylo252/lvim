@@ -46,12 +46,12 @@ linters.setup {
   },
   {
     command = "luacheck",
-    cwd = nls_cache.by_bufnr(function(params)
+    cwd = function(params)
       return root_pattern ".luacheckrc"(params.bufname)
-    end),
-    runtime_condition = nls_cache.by_bufnr(function(params)
-      return path.exists(path.join(params.root, ".luacheckrc"))
-    end),
+    end,
+    -- runtime_condition = function(_)
+    --   return vim.fs.find(".luacheckrc", { upward = true })
+    -- end,
   },
 }
 

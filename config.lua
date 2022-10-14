@@ -9,7 +9,7 @@ lvim.format_on_save = {
 }
 
 ---{{{ builtins
-lvim.builtin.notify.active = true
+lvim.builtin.notify.active = false
 lvim.colorscheme = "tokyonight-night"
 
 lvim.builtin.comment.mappings["extra"] = true
@@ -67,13 +67,6 @@ table.insert(lvim.plugins, {
 })
 
 table.insert(lvim.plugins, {
-  "norcalli/nvim-colorizer.lua",
-  config = function()
-    require("colorizer").setup({ "css", "scss", "html", "javascript" }, {})
-  end,
-})
-
-table.insert(lvim.plugins, {
   "RRethy/nvim-treesitter-textsubjects",
 })
 
@@ -84,20 +77,4 @@ table.insert(lvim.plugins, {
     require("telescope").load_extension "harpoon"
   end,
 })
-
-table.insert(lvim.plugins, {
-  "anuvyklack/pretty-fold.nvim",
-  config = function()
-    require("pretty-fold").setup()
-  end,
-})
-
-table.insert(lvim.plugins, {
-  "EdenEast/nightfox.nvim",
-  config = function()
-    -- Default options
-    require("nightfox").setup {}
-  end,
-})
-
 ---}}}
