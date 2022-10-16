@@ -1,9 +1,3 @@
-if vim.g.loaded_lvim_python_config then
-  return
-end
-
-vim.g.loaded_lvim_python_config = true
-
 -- Set a formatter.
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
@@ -44,10 +38,3 @@ table.insert(lvim.plugins, {
   "mfussenegger/nvim-dap-python",
   config = dap_python_setup,
 })
-
-local plugins = require "lvim.plugins"
-local plugin_loader = require "lvim.plugin-loader"
-
-plugin_loader.load { plugins, lvim.plugins }
-plugin_loader.ensure_plugins()
-plugin_loader.recompile()

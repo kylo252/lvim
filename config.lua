@@ -13,7 +13,6 @@ lvim.builtin.notify.active = false
 lvim.colorscheme = "tokyonight-night"
 
 lvim.builtin.comment.mappings["extra"] = true
-lvim.builtin.comment.mappings["extended"] = true
 
 lvim.builtin.project.datapath = get_cache_dir()
 lvim.builtin.project.manual_mode = false
