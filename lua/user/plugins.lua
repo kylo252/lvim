@@ -1,6 +1,7 @@
 return {
 
   -- LSP and linting
+  { "p00f/clangd_extensions.nvim" },
   { "nvim-treesitter/nvim-treesitter-textobjects" },
   {
     "nvim-treesitter/playground",
