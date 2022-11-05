@@ -8,6 +8,7 @@ return {
     config = function()
       lvim.builtin.treesitter.playground.enable = true
     end,
+    cmd = "TSPlaygroundToggle",
   },
   {
     "kevinhwang91/nvim-bqf",
@@ -92,9 +93,11 @@ return {
     config = function()
       require("user.zk").setup()
     end,
+    cmd = "ZkNotes",
   },
   {
     "nvim-neotest/neotest",
+    disable = true,
     requires = {
       "nvim-neotest/neotest-plenary",
     },
@@ -117,6 +120,12 @@ return {
     end,
     requires = "nvim-treesitter/nvim-treesitter",
     opt = true,
+  },
+  {
+    "nvchad/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup { filetypes = { "css", "scss", "html", "javascript" } }
+    end,
   },
   ---}}}
 }

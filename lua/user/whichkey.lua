@@ -1,6 +1,7 @@
 lvim.builtin.which_key.mappings = {
   ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
   ["<Space>"] = { ":BufferNext<CR>", "Go to the next buffer" },
+  ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "Quit" },
   b = {
     name = "+buffers",
     b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
@@ -56,8 +57,8 @@ lvim.builtin.which_key.mappings = {
     name = "+git",
     a = { "<cmd>Telescope git_commits<cr>", "commits" },
     b = { "<cmd>Telescope git_bcommits<cr>", "Buffers commits" },
-    d = { "<cmd>! fman-tmux -c 'git dots-lazy'<cr>", "Lazydots" },
-    g = { "<cmd>! fman-tmux -c lazygit<cr>", "Lazygit" },
+    d = { "<cmd>silent ! fman-tmux -c 'git dots-lazy'<cr>", "Lazydots" },
+    g = { "<cmd>silent ! fman-tmux -c lazygit<cr>", "Lazygit" },
     Y = {
       b = {
         function()
