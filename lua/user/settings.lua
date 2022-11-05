@@ -44,16 +44,3 @@ vim.opt.shortmess:append "c" -- don't show the dumb matching stuff
 
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
-
-if vim.env.TMUX then
-  vim.g.clipboard = {
-    copy = {
-      ["+"] = "tmux load-buffer -w -",
-      ["*"] = "tmux load-buffer -w -",
-    },
-    paste = {
-      ["+"] = "tmux save-buffer -",
-      ["*"] = "tmux save-buffer -",
-    },
-  }
-end
