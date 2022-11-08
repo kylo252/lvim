@@ -25,6 +25,7 @@ lvim.builtin.terminal.active = true
 lvim.builtin.terminal.open_mapping = "<C-\\>"
 lvim.builtin.terminal.direction = "horizontal"
 
+lvim.builtin.nvimtree.setup.filters.custom = {}
 lvim.builtin.indentlines.options.show_first_indent_level = false
 lvim.builtin.indentlines.options.use_treesitter = false
 
@@ -75,4 +76,5 @@ table.insert(lvim.plugins, {
     require("telescope").load_extension "harpoon"
   end,
 })
+
 ---}}}

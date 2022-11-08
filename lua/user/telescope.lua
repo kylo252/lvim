@@ -73,6 +73,18 @@ function M.setup_z()
     prompt = ">> ",
     prompt_title = "~ Zoxide ~",
     mappings = {
+      default = {
+        action = function(selection)
+          vim.schedule(function()
+            vim.api.nvim_set_current_dir(selection.path)
+            vim.cmd("lcd " .. selection.path)
+            require("nvim-tree").change_dir(selection.path)
+          end)
+        end,
+        after_action = function(selection)
+          print("Directory changed to " .. selection.path)
+        end,
+      },
       ["<C-f>"] = {
         action = function(selection)
           builtin.find_files(themes.get_ivy { cwd = selection.path })
