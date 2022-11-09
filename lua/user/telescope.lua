@@ -1,7 +1,7 @@
 local M = {}
 
 local _, actions = pcall(require, "telescope.actions")
-local _, themes = pcall(require, "telescope.themes")
+local _, builtin = pcall(require, "telescope.builtin")
 
 lvim.builtin.telescope.defaults.path_display = nil
 lvim.builtin.telescope.defaults.pickers = nil
@@ -59,44 +59,30 @@ local ivy = {
 local defaults = lvim.builtin.telescope.defaults
 lvim.builtin.telescope.defaults = vim.tbl_deep_extend("force", defaults, ivy)
 
-function M.setup_z()
-  local _, builtin = pcall(require, "telescope.builtin")
-
-  require("telescope._extensions.zoxide.config").setup {
-    previewer = false,
-    sorting_strategy = "ascending",
-    layout_strategy = "bottom_pane",
-    layout_config = {
-      height = 15,
-      width = 0.5,
+lvim.builtin.telescope.extensions.zoxide = {
+  prompt = ">> ",
+  prompt_title = "~ Zoxide ~",
+  mappings = {
+    default = {
+      action = function(selection)
+        vim.api.nvim_set_current_dir(selection.path)
+        vim.cmd("lcd " .. selection.path)
+      end,
+      after_action = function(selection)
+        print("Directory changed to " .. selection.path)
+      end,
     },
-    prompt = ">> ",
-    prompt_title = "~ Zoxide ~",
-    mappings = {
-      default = {
-        action = function(selection)
-          vim.schedule(function()
-            vim.api.nvim_set_current_dir(selection.path)
-            vim.cmd("lcd " .. selection.path)
-            require("nvim-tree").change_dir(selection.path)
-          end)
-        end,
-        after_action = function(selection)
-          print("Directory changed to " .. selection.path)
-        end,
-      },
-      ["<C-f>"] = {
-        action = function(selection)
-          builtin.find_files(themes.get_ivy { cwd = selection.path })
-        end,
-      },
-      ["<C-g>"] = {
-        action = function(selection)
-          builtin.live_grep(themes.get_ivy { cwd = selection.path })
-        end,
-      },
+    ["<C-f>"] = {
+      action = function(selection)
+        builtin.find_files { cwd = selection.path }
+      end,
     },
-  }
-end
+    ["<C-g>"] = {
+      action = function(selection)
+        builtin.live_grep { cwd = selection.path }
+      end,
+    },
+  },
+}
 
 return M

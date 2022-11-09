@@ -26,9 +26,6 @@ return {
   {
     "jvgrootveld/telescope-zoxide",
     after = "telescope.nvim",
-    config = function()
-      require("user.telescope").setup_z()
-    end,
   },
   {
     "ggandor/lightspeed.nvim",
