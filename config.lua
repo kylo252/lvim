@@ -2,6 +2,7 @@
 lvim.log.level = "info"
 lvim.log.override_notify = false
 lvim.format_on_save = {
+  enabled = true,
   ---@usage pattern string pattern used for the autocommand (Default: '*')
   pattern = "*.lua",
   ---@usage timeout number timeout in ms for the format request (Default: 1000)
@@ -61,8 +62,6 @@ pcall(require, "scratch")
 
 table.insert(lvim.plugins, {
   "arkav/lualine-lsp-progress",
-  opt = false,
-  disable = false,
 })
 
 table.insert(lvim.plugins, {
