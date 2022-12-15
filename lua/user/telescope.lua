@@ -3,10 +3,8 @@ local M = {}
 local _, actions = pcall(require, "telescope.actions")
 local _, builtin = pcall(require, "telescope.builtin")
 
+lvim.builtin.telescope.theme = "ivy"
 lvim.builtin.telescope.defaults.path_display = nil
-lvim.builtin.telescope.defaults.pickers = nil
-lvim.builtin.telescope.pickers = nil
-
 lvim.builtin.telescope.defaults.mappings = {
   i = {
     ["<C-c>"] = actions.close,
@@ -27,37 +25,6 @@ lvim.builtin.telescope.defaults.mappings = {
     -- ["<C-i>"] = my_cool_custom_action,
   },
 }
-
-local ivy = {
-  theme = "ivy",
-  sorting_strategy = "ascending",
-  layout_strategy = "bottom_pane",
-  layout_config = {
-    center = {
-      preview_cutoff = 70,
-    },
-    cursor = {
-      preview_cutoff = 70,
-    },
-    horizontal = {
-      preview_cutoff = 120,
-      prompt_position = "bottom",
-    },
-    vertical = {
-      preview_cutoff = 70,
-    },
-    height = 25,
-  },
-  border = true,
-  borderchars = {
-    prompt = { "─", " ", " ", " ", "─", "─", " ", " " },
-    results = { " " },
-    preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-  },
-}
-
-local defaults = lvim.builtin.telescope.defaults
-lvim.builtin.telescope.defaults = vim.tbl_deep_extend("force", defaults, ivy)
 
 lvim.builtin.telescope.extensions.zoxide = {
   prompt = ">> ",
