@@ -1,5 +1,6 @@
 local opts = {
-  ensure_installed = { "bash", "lua", "c", "cpp", "vim", "json", "yaml" },
+  ensure_installed = nil,
+  auto_install = true,
   highlight = { enable = true },
   indent = { enable = true, disable = { "python", "yaml" } },
   autotag = { enable = true },

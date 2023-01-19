@@ -1,5 +1,6 @@
 -- general
 lvim.log.level = "info"
+lvim.log.async = false
 lvim.log.override_notify = false
 lvim.format_on_save = {
   enabled = true,
@@ -17,7 +18,7 @@ lvim.builtin.comment.mappings["extra"] = true
 lvim.builtin.project.datapath = get_cache_dir()
 lvim.builtin.project.manual_mode = false
 lvim.builtin.project.detection_methods = { "lsp", "pattern" }
-lvim.builtin.project.ignore_lsp = { "null-ls" }
+lvim.builtin.project.ignore_lsp = { "copilot", "null-ls", "sumneko_lua" }
 lvim.builtin.project.silent_chdir = true
 
 lvim.builtin.autopairs.disable_filetype = { "TelescopePrompt", "ps1", "sh" }
@@ -62,24 +63,27 @@ pcall(require, "scratch")
 
 table.insert(lvim.plugins, {
   "arkav/lualine-lsp-progress",
+  lazy = true,
 })
 
 table.insert(lvim.plugins, {
   "RRethy/nvim-treesitter-textsubjects",
+  lazy = true,
 })
 
 table.insert(lvim.plugins, {
   "ThePrimeagen/harpoon",
-  requires = { "nvim-telescope/telescope.nvim" },
+  dependencies = { "nvim-telescope/telescope.nvim" },
   config = function()
     require("telescope").load_extension "harpoon"
   end,
+  lazy = true,
 })
 
 table.insert(lvim.plugins, {
   "zbirenbaum/copilot-cmp",
   event = "InsertEnter",
-  requires = { "zbirenbaum/copilot.lua" },
+  dependencies = { "zbirenbaum/copilot.lua" },
   config = function()
     vim.defer_fn(function()
       require("copilot").setup()

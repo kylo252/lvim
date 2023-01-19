@@ -1,9 +1,9 @@
 local M = {}
 
-pcall(vim.api.nvim_clear_autocmds, {
-  event = "FileType",
-  group = "_filetype_settings",
-})
+-- pcall(vim.api.nvim_clear_autocmds, {
+--   event = "FileType",
+--   group = "_filetype_settings",
+-- })
 
 lvim.autocommands = {
   {

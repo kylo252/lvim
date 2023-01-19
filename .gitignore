@@ -5,3 +5,4 @@ schemas/_generated
 lua/scratch.lua
 spell
 .luacheckcache
+lazy-lock.json

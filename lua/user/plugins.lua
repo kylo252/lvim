@@ -1,8 +1,8 @@
 return {
 
   -- LSP and linting
-  { "p00f/clangd_extensions.nvim" },
-  { "nvim-treesitter/nvim-treesitter-textobjects" },
+  { "p00f/clangd_extensions.nvim", lazy = true },
+  { "nvim-treesitter/nvim-treesitter-textobjects", lazy = true },
   {
     "nvim-treesitter/playground",
     config = function()
@@ -25,7 +25,7 @@ return {
   -- Search
   {
     "jvgrootveld/telescope-zoxide",
-    after = "telescope.nvim",
+    lazy = true,
   },
   {
     "ggandor/lightspeed.nvim",
@@ -66,21 +66,19 @@ return {
     cmd = "DiffViewOpen",
   },
   -- MISC
-  { "gpanders/editorconfig.nvim" },
   {
     "michaelb/sniprun",
-    run = "bash ./install.sh",
+    build = "bash ./install.sh",
     config = function()
       require("user.sniprun").setup()
     end,
     event = "BufReadPost",
-    opt = true,
+    lazy = true,
   },
   {
     "nvim-neorg/neorg",
     ft = "norg",
-    opt = true,
-    after = "nvim-treesitter", -- You may want to specify Telescope here as well
+    lazy = true,
     config = function()
       require("user.neorg").setup()
     end,
@@ -94,8 +92,7 @@ return {
   },
   {
     "nvim-neotest/neotest",
-    disable = true,
-    requires = {
+    dependencies = {
       "nvim-neotest/neotest-plenary",
     },
     config = function()
@@ -115,14 +112,15 @@ return {
         input_after_command = true,
       }
     end,
-    requires = "nvim-treesitter/nvim-treesitter",
-    opt = true,
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    lazy = true,
   },
   {
     "nvchad/nvim-colorizer.lua",
     config = function()
       require("colorizer").setup { filetypes = { "css", "scss", "html", "javascript" } }
     end,
+    ft = { "css", "scss", "html", "javascript" },
   },
   ---}}}
 }
