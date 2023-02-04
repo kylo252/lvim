@@ -1,8 +1,8 @@
-return {
+local user_plugins = {
 
   -- LSP and linting
-  { "p00f/clangd_extensions.nvim", lazy = true },
-  { "nvim-treesitter/nvim-treesitter-textobjects", lazy = true },
+  { "p00f/clangd_extensions.nvim" },
+  { "nvim-treesitter/nvim-treesitter-textobjects" },
   {
     "nvim-treesitter/playground",
     config = function()
@@ -25,7 +25,6 @@ return {
   -- Search
   {
     "jvgrootveld/telescope-zoxide",
-    lazy = true,
   },
   {
     "ggandor/lightspeed.nvim",
@@ -73,12 +72,10 @@ return {
       require("user.sniprun").setup()
     end,
     event = "BufReadPost",
-    lazy = true,
   },
   {
     "nvim-neorg/neorg",
     ft = "norg",
-    lazy = true,
     config = function()
       require("user.neorg").setup()
     end,
@@ -113,7 +110,6 @@ return {
       }
     end,
     dependencies = "nvim-treesitter/nvim-treesitter",
-    lazy = true,
   },
   {
     "nvchad/nvim-colorizer.lua",
@@ -124,3 +120,10 @@ return {
   },
   ---}}}
 }
+
+for _, spec in ipairs(user_plugins) do
+  spec.lazy = vim.F.if_nil(spec.lazy, true)
+  spec.event = vim.F.if_nil(spec.event, { "VeryLazy" })
+end
+
+return user_plugins
