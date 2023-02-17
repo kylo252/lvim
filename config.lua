@@ -18,7 +18,7 @@ lvim.builtin.comment.mappings["extra"] = true
 lvim.builtin.project.datapath = get_cache_dir()
 lvim.builtin.project.manual_mode = false
 lvim.builtin.project.detection_methods = { "lsp", "pattern" }
-lvim.builtin.project.ignore_lsp = { "copilot", "null-ls", "sumneko_lua" }
+lvim.builtin.project.ignore_lsp = { "copilot", "null-ls", "lua_ls" }
 lvim.builtin.project.silent_chdir = true
 
 lvim.builtin.autopairs.disable_filetype = { "TelescopePrompt", "ps1", "sh" }

@@ -3,5 +3,6 @@
   "Lua.diagnostics.disable": [
     "redundant-parameter",
     "param-type-mismatch"
-  ]
+  ],
+  "Lua.runtime.version": "LuaJIT"
 }

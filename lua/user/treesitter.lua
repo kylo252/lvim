@@ -1,5 +1,5 @@
 local opts = {
-  ensure_installed = nil,
+  ensure_installed = { "comment", "markdown", "markdown_inline" },
   auto_install = true,
   highlight = { enable = true },
   indent = { enable = true, disable = { "python", "yaml" } },
