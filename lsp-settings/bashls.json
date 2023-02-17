@@ -1,0 +1,3 @@
+{
+  "bashIde.shellcheckArguments": "--exclude=SC1091"
+}

@@ -16,6 +16,15 @@ lvim.autocommands = {
     },
   },
   {
+    "DirChanged",
+    {
+      group = "_general_settings",
+      pattern = "*",
+      desc = "set osc7 so that tmux can see it",
+      command = [[call chansend(v:stderr, printf("\033]7;%s\033", v:event.cwd))]],
+    },
+  },
+  {
     "FileType",
     {
       group = "_filetype_settings",
