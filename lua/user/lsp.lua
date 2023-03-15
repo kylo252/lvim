@@ -49,6 +49,9 @@ linters.setup {
     cwd = function(params)
       return root_pattern ".luacheckrc"(params.bufname)
     end,
+    condition = function(utils)
+      return utils.root_has_file ".luacheckrc"
+    end,
     -- runtime_condition = function(_)
     --   return vim.fs.find(".luacheckrc", { upward = true })
     -- end,
