@@ -105,6 +105,11 @@ local user_plugins = {
     dependencies = "nvim-treesitter/nvim-treesitter",
   },
   {
+    "simrat39/rust-tools.nvim",
+    lazy = true,
+    ft = { "rust" },
+  },
+  {
     "nvchad/nvim-colorizer.lua",
     config = function()
       require("colorizer").setup { filetypes = { "css", "scss", "html", "javascript" } }
