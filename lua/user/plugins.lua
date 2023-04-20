@@ -74,13 +74,6 @@ local user_plugins = {
     event = "BufReadPost",
   },
   {
-    "nvim-neorg/neorg",
-    ft = "norg",
-    config = function()
-      require("user.neorg").setup()
-    end,
-  },
-  {
     "mickael-menu/zk-nvim",
     config = function()
       require("user.zk").setup()

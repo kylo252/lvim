@@ -11,7 +11,7 @@ lvim.format_on_save = {
 }
 
 ---{{{ builtins
-lvim.colorscheme = "lunar"
+lvim.colorscheme = "tokyonight-night"
 
 lvim.builtin.comment.mappings["extra"] = true
 
