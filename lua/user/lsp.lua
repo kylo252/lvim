@@ -2,9 +2,24 @@ local M = {}
 
 ---{{{ LSP
 
-lvim.lsp.diagnostics.virtual_text = false
 lvim.lsp.default_keybinds = true
-lvim.lsp.diagnostics.update_in_insert = true
+
+vim.diagnostic.config {
+  virtual_text = false,
+  update_in_insert = true,
+  severity_sort = true,
+  float = {
+    focusable = true,
+    style = "minimal",
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+    suffix = nil,
+    format = nil,
+  },
+}
+
 vim.lsp.set_log_level "warn"
 
 require("vim.lsp.log").set_format_func(vim.inspect)
